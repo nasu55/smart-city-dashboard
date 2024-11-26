@@ -165,7 +165,7 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
-                          <Link href={`/brands/edit/${packageItem._id}`}>
+                          <Link href={`/universities/edit/${packageItem._id}`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="20"

@@ -29,10 +29,10 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  companyId: z.string().trim().min(1, { message: "Company Id is required." }),
-  companyName: z.string().trim().min(1, { message: "Company Name is required." }),
-  brandDescription: z.string().trim(),
-  brandLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  universityId: z.string().trim().min(1, { message: "UniversityId is required." }),
+  universityName: z.string().trim().min(1, { message: "UniversityName is required." }),
+  universityDescription: z.string().trim(),
+  universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
     .refine(
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .jpg, .jpeg, .png and .webp formats are supported."),
@@ -48,8 +48,8 @@ const navigationData: PackageNavigation[] = [
     link: '/'
   },
   {
-    name: 'Companies / ',
-    link: '/companies'
+    name: 'Universities / ',
+    link: '/universities'
   },
   {
     name: 'Add ',
@@ -57,7 +57,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const BrandForm = () => {
+const UniversityEditForm = () => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -92,8 +92,8 @@ const BrandForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('Company Added Successfully.')
-      router.push("/tables/company");
+      toast.success('University Added Successfully.')
+      router.push("/tables/university");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -104,7 +104,7 @@ const BrandForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="ADD COMPANY" navigation={navigationData} />
+      <Breadcrumb pageName="ADD UNIVERSITY" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -113,40 +113,40 @@ const BrandForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Company
+                  Add University
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Id
+                    University Id
                   </label>
                   <input
-                    {...register("companyId")}
+                    {...register("universityId")}
                     type="text"
-                    placeholder="Company Id"
+                    placeholder="University Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyId && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyId.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Name
+                    University Name
                   </label>
                   <input
-                    {...register("companyName")}
+                    {...register("universityName")}
                     type="text"
-                    placeholder="Company Name"
+                    placeholder="University Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -161,9 +161,9 @@ const BrandForm = () => {
                     placeholder="Address"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   ></textarea>
-                  {errors.brandDescription && (
+                  {errors.universityDescription && (
                     <p className="text-sm text-red-600">
-                      {errors.brandDescription.message}
+                      {errors.universityDescription.message}
                     </p>
                   )}
                 </div>
@@ -179,9 +179,9 @@ const BrandForm = () => {
                     placeholder="Email-Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -196,9 +196,9 @@ const BrandForm = () => {
                     placeholder="Contact Number"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -208,14 +208,14 @@ const BrandForm = () => {
                     Website URL
                   </label>
                   <input
-                    {...register("Website URL")}
+                    {...register("website URL")}
                     type="text"
                     placeholder="Website URL"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -233,31 +233,60 @@ const BrandForm = () => {
                     placeholder="Established Year"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   /> */}
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
 
                 <div>
+                  <SelectDropdown
+                    data={[{ _id: 1, name: 'pending' }]}
+                    name={" Accreditation Status"}
+                    register={register("productBrand")}
+                  />
+                  {errors.universityName && (
+                    <p className="text-sm text-red-600">
+                      {errors.universityName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
                   <DropzoneWrapper>
                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      Company Logo
+                      University Logo
                       {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.brandLogo}</span>
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='Company Logo'
+                      name='University Logo'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.brandLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
                     />
+
+                    <div>
+                      <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                        Dean/Director Name
+                      </label>
+                      <input
+                        {...register("dean/director Name")}
+                        type="text"
+                        placeholder="Dean/Director Name"
+                        className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                      />
+                      {errors.universityName && (
+                        <p className="text-sm text-red-600">
+                          {errors.universityName.message}
+                        </p>
+                      )}
+                    </div>
 
                     <div>
                   <SelectDropdown
@@ -265,9 +294,9 @@ const BrandForm = () => {
                     name={" country"}
                     register={register("productBrand")}
                   />
-                  {errors.companyName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -304,4 +333,4 @@ const BrandForm = () => {
   );
 };
 
-export default BrandForm;
+export default UniversityEditForm;

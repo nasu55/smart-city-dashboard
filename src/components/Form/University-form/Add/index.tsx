@@ -59,6 +59,7 @@ const navigationData: PackageNavigation[] = [
 
 const UniversityAddForm = () => {
 
+
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
 
