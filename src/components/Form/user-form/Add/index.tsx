@@ -48,8 +48,8 @@ const navigationData: PackageNavigation[] = [
     link: '/'
   },
   {
-    name: 'Universities / ',
-    link: '/universities'
+    name: 'users / ',
+    link: '/user'
   },
   {
     name: 'Add ',
@@ -57,8 +57,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const UniversityAddForm = () => {
-
+const UserAddForm = () => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -93,8 +92,8 @@ const UniversityAddForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('University Added Successfully.')
-      router.push("/tables/university");
+      toast.success('User Added Successfully.')
+      router.push("/tables/user");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -105,7 +104,7 @@ const UniversityAddForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="ADD UNIVERSITY" navigation={navigationData} />
+      <Breadcrumb pageName="ADD USER" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -114,13 +113,13 @@ const UniversityAddForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add University
+                  Add User
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    University Id
+                    User Id
                   </label>
                   <input
                     {...register("universityId")}
@@ -137,7 +136,7 @@ const UniversityAddForm = () => {
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    University Name
+                    User Name
                   </label>
                   <input
                     {...register("universityName")}
@@ -334,4 +333,4 @@ const UniversityAddForm = () => {
   );
 };
 
-export default UniversityAddForm;
+export default UserAddForm;

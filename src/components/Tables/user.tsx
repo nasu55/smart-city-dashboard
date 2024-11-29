@@ -5,33 +5,33 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
-import CompanyTable from "./Company";
 
 type Props = {
-  listOfUniversity: [];
+  listOfBrands: [];
 };
 
-const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
+const CompanyTable = ({ listOfBrands }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const filteredBrands = listOfBrands.filter((brandItem: any) =>
-    brandItem.brandName.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  // const filteredBrands = listOfBrands.filter((brandItem: any) =>
+  //   brandItem.brandName.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
 
-  const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
-  const brandData = filteredBrands.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  // const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
+  // const brandData = filteredBrands.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage,
+  // );
+  const brandData:any = [];
 
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
+  // const handlePageChange = (pageNumber: number) => {
+  //   if (pageNumber >= 1 && pageNumber <= totalPages) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // };
 
   const router = useRouter();
   // router.refresh();
@@ -53,7 +53,7 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
   return (
     <>
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        
+       
             <div className="ml-7 flex justify-between">
               <div>
                 <form className="mx-auto max-w-md">
@@ -85,7 +85,7 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                       type="search"
                       id="default-search"
                       className="block w-full rounded-lg border  border-gray-300 bg-gray-50 p-1 px-20 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                      placeholder="Search University"
+                      placeholder="Search User"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -93,10 +93,10 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                 </form>
               </div>
               <Link
-                href={"/universities/add"}
+                href={"/companies/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
-                Add University
+                  Add Company
               </Link>
             </div>
             <div className="max-w-full overflow-x-auto">
@@ -104,10 +104,10 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                    University ID
+                    Company ID
                     </th>
                     <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      University Name
+                      Company Name
                     </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Established Year
@@ -120,7 +120,7 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                     </th>
                     <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
-                    Actions
+                      Actions
                     </th>
                   </tr>
                 </thead>
@@ -165,7 +165,7 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
-                          <Link href={`/universities/edit/${packageItem._id}`}>
+                          <Link href={`/brands/edit/${packageItem._id}`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="20"
@@ -253,10 +253,10 @@ const UniversityTable = ({ listOfUniversity: listOfBrands }: Props) => {
               >
                 &raquo;
               </button> */}
-         </div>
+            </div>
       </div>
     </>
   );
 };
 
-export default UniversityTable;  
+export default CompanyTable;
