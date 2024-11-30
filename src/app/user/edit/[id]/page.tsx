@@ -3,8 +3,10 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
-import UniversityAddForm from "@/components/Form/University-form/Add";
-import UniversityEditForm from "@/components/Form/University-form/Update";
+import UserAddForm from "@/components/Form/User-form/Add";
+import UserEditForm from "@/components/Form/user-form/Update";
+
+
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements Page | NextAdmin - Next.js Dashboard Kit",
@@ -29,7 +31,7 @@ const FormElementsPage = async ({params}:{params:{id:string}}) => {
   const brand = {}
   return (
     <DefaultLayout>
-      <UniversityEditForm/>
+      <UserEditForm/>
     </DefaultLayout>
   );
 };

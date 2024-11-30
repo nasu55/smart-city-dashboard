@@ -29,13 +29,16 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  universityId: z.string().trim().min(1, { message: "UniversityId is required." }),
-  universityName: z.string().trim().min(1, { message: "UniversityName is required." }),
-  universityDescription: z.string().trim(),
-  universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  userId: z.string().trim().min(1, { message: "User Id is required." }),
+  userName: z.string().trim().min(1, { message: "user Name is required." }),
+  password: z.string().trim().min(1, { message: "Password is required." }),
+  address: z.string().trim().min(1, { message: "Address is required." }),
+  email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
+  contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
+  // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -122,14 +125,14 @@ const UserAddForm = () => {
                     User Id
                   </label>
                   <input
-                    {...register("universityId")}
+                    {...register("userId")}
                     type="text"
-                    placeholder="University Id"
+                    placeholder="User Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.universityName && (
+                  {errors.userId && (
                     <p className="text-sm text-red-600">
-                      {errors.universityName.message}
+                      {errors.userId.message}
                     </p>
                   )}
                 </div>
@@ -139,18 +142,33 @@ const UserAddForm = () => {
                     User Name
                   </label>
                   <input
-                    {...register("universityName")}
+                    {...register("userName")}
                     type="text"
-                    placeholder="University Name"
+                    placeholder="User Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.universityName && (
+                  {errors.userName && (
                     <p className="text-sm text-red-600">
-                      {errors.universityName.message}
+                      {errors.userName.message}
                     </p>
                   )}
                 </div>
-
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Password
+                  </label>
+                  <input
+                    {...register("password")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Address
@@ -161,9 +179,9 @@ const UserAddForm = () => {
                     placeholder="Address"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   ></textarea>
-                  {errors.universityDescription && (
+                  {errors.address && (
                     <p className="text-sm text-red-600">
-                      {errors.universityDescription.message}
+                      {errors.address.message}
                     </p>
                   )}
                 </div>
@@ -174,14 +192,14 @@ const UserAddForm = () => {
                     Email-Id
                   </label>
                   <input
-                    {...register("email-Id")}
+                    {...register("email_Id")}
                     type="email"
                     placeholder="Email-Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.universityName && (
+                  {errors.email_Id && (
                     <p className="text-sm text-red-600">
-                      {errors.universityName.message}
+                      {errors.email_Id.message}
                     </p>
                   )}
                 </div>
@@ -191,70 +209,20 @@ const UserAddForm = () => {
                     Contact Number
                   </label>
                   <input
-                    {...register("contact Number")}
+                    {...register("contactNumber")}
                     type="number"
                     placeholder="Contact Number"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.universityName && (
+                  {errors.contactNumber && (
                     <p className="text-sm text-red-600">
-                      {errors.universityName.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Website URL
-                  </label>
-                  <input
-                    {...register("website URL")}
-                    type="text"
-                    placeholder="Website URL"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.universityName && (
-                    <p className="text-sm text-red-600">
-                      {errors.universityName.message}
-                    </p>
-                  )}
-                </div>
-
-
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Established Year
-                  </label>
-                  <DatePickerOne />
-
-                  {/* <input
-                    {...register("Established Year")}
-                    type="calendar"
-                    placeholder="Established Year"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  /> */}
-                  {errors.universityName && (
-                    <p className="text-sm text-red-600">
-                      {errors.universityName.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <SelectDropdown
-                    data={[{ _id: 1, name: 'pending' }]}
-                    name={" Accreditation Status"}
-                    register={register("productBrand")}
-                  />
-                  {errors.universityName && (
-                    <p className="text-sm text-red-600">
-                      {errors.universityName.message}
+                      {errors.contactNumber.message}
                     </p>
                   )}
                 </div>
                 <div>
                   <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
@@ -303,7 +271,7 @@ const UserAddForm = () => {
 
                    
 
-                   
+                    */}
 
                   </DropzoneWrapper>
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -333,4 +301,6 @@ const UserAddForm = () => {
   );
 };
 
+
+             
 export default UserAddForm;
