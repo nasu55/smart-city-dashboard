@@ -93,7 +93,7 @@ const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
                 </form>
               </div>
               <Link
-                href={"/shop/add"}
+                href={"/admin/shop/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
                 Add Shop

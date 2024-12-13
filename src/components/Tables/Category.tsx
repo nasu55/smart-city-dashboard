@@ -40,12 +40,12 @@ const CategoryTable = ({ listOfCategories }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const filteredCategories = listOfCategories.filter((categoryItem: any) =>
+  const filteredCategories = listOfCategories?.filter((categoryItem: any) =>
     categoryItem.categoryName.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
-  const categoryData = filteredCategories.slice(
+  const totalPages = Math.ceil(filteredCategories?.length / itemsPerPage);
+  const categoryData = filteredCategories?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
@@ -101,7 +101,7 @@ const CategoryTable = ({ listOfCategories }: Props) => {
       )} */}
 
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        {categoryData.length > 0 ? 
+        {categoryData?.length > 0 ? 
           <>
             <div className="ml-7 flex justify-between">
               <div>
@@ -144,7 +144,7 @@ const CategoryTable = ({ listOfCategories }: Props) => {
 
               {/* <p className="ml-7 text-lg font-semibold">Items</p> */}
               <Link
-                href={"/tables/categories/add"}
+                href={"/admin/category/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
                 Add Category
@@ -191,7 +191,7 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                       >
                         <div className="flex items-center justify-end space-x-3.5">
                           <Link
-                            href={`/tables/categories/edit/${packageItem._id}`}
+                            href={`/admin/categories/edit/${packageItem._id}`}
                           >
                             <button className="hover:text-primary">
                               <svg
@@ -328,7 +328,7 @@ const CategoryTable = ({ listOfCategories }: Props) => {
           <div className="flex w-full flex-col items-center justify-center">
             <p className="text-lg text-red-600">Data not found</p>
             <Link
-              href={"/tables/categories/add"}
+              href={"/admin/category/add"}
               className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
             >
               Add Category
