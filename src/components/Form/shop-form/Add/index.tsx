@@ -27,6 +27,7 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   shopId: z.string().trim().min(1, { message: "Shop Id is required." }),
@@ -87,13 +88,13 @@ const ShopAddForm = () => {
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+      const response = await shopApi.createshop(data);
 
-      // if (response.data.success == true) {
+      if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
+        toast.success('Brand Added Successfully.')
+        router.push("/tables/brands");
+      }
       toast.success('Shop Added Successfully.')
       router.push("/shop");
     } catch (error: any) {

@@ -1,15 +1,15 @@
 import { axiosClient } from "./config/axiosConfig";
 
-export const brandApi = {
+export const shopApi = {
   createshop: async function (body: any) {
     return await axiosClient.post(
-      "brands/",
+      "shops/create",
       body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+      // {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // },
     );
   },
   updateshop: async function (brandId: any, body: any) {

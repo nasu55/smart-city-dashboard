@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
 
 export const axiosClient = axios.create(
     {
-        baseURL:'http://localhost:3010/api/dashboard/',
+        baseURL:'http://localhost:5000/api/dashboard/',
         headers:headers
     }
 )

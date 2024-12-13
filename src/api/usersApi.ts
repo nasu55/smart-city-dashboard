@@ -1,6 +1,6 @@
 import { axiosClient } from "./config/axiosConfig";
 
-export const brandApi = {
+export const usersApi = {
   createusers: async function (body: any) {
     return await axiosClient.post(
       "brands/",
@@ -12,7 +12,7 @@ export const brandApi = {
       },
     );
   },
-  updateusers: async function (userId: any, body: any) {
+  update: async function (userId: any, body: any) {
     return await axiosClient.put(
       `brands/update/${brandId}`,
       body,
