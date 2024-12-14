@@ -143,7 +143,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Product",
-        route: "/products",
+        route: "/shop-admin/products",
        
       },
       

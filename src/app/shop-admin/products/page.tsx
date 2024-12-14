@@ -18,7 +18,7 @@ const packageData: PackageNavigation[] = [
   },
   {
     name:'Products ',
-    link:'/tables/products'
+    link:'/shop-admin/products'
   },
 ];
 
