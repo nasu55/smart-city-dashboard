@@ -27,16 +27,17 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   shopId: z.string().trim().min(1, { message: "Shop Id is required." }),
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
-  password: z.string().trim().min(1, { message: "Password is required." }),
+  password: z.any(),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
-  contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
+  contactNumber: z.any(),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -89,20 +90,27 @@ const ShopEditForm = ({shopId,shop}: Props) => {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
+  } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
+    defaultValues:{
+      shopName:shop.shopName,
+      ownerName:shop.ownerName,
+      userName:shop.userName,
+      email_Id:shop.email_Id,
+      address:shop.address,
+      contactNumber:shop.contactNumber
 
+    }
+   });
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      // const response = await shopApi.createBrand(formData);
+      const response = await shopApi.updateshop(shopId,data);
 
-      // if (response.data.success == true) {
+      if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      // router.push("/admin/brands");
-      // }
-      toast.success('Shop Added Successfully.')
-      router.push("/tables/shop");
+        toast.success('Shop Updated succefffully')
+        router.push("/admin/shop");
+      }
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -208,7 +216,7 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                   />
                   {errors.password && (
                     <p className="text-sm text-red-600">
-                      {errors.password.message}
+                      {/* {errors.password.message} */}
                     </p>
                   )}
                 </div>
@@ -260,7 +268,7 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                   />
                   {errors.contactNumber && (
                     <p className="text-sm text-red-600">
-                      {errors.contactNumber.message}
+                      {/* {errors.contactNumber.message} */}
                     </p>
                   )}
                 </div>

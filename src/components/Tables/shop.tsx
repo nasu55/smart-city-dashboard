@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
+import { shopApi } from "@/api/shopApi";
 // import ShopTable from "/shop";
 
 type Props = {
@@ -36,10 +37,9 @@ const ShopTable = ({ listOfShops }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-  async function deleteBrand(id: any) {
+  async function deleteShop(id: any) {
     try {
-      const responseDelete = await brandApi.deleteBrand(id);
-      console.log("first", responseDelete.data.response);
+      const responseDelete = await shopApi.deleteshop(id);
 
       if (responseDelete.data.success == true) {
         toast.success(responseDelete.data.message);
@@ -188,7 +188,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                           >
                             {itemId === shops._id && (
                               <Delete
-                                deleteId={deleteBrand}
+                                deleteId={deleteShop}
                                 id={shops._id}
                                 isOpen={itemId === shops._id}
                                 setIsOpen={setItemId}

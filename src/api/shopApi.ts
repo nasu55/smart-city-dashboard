@@ -12,15 +12,11 @@ export const shopApi = {
       // },
     );
   },
-  updateshop: async function (brandId: any, body: any) {
+  updateshop: async function (shopId: any, body: any) {
     return await axiosClient.put(
-      `brands/update/${brandId}`,
+      `shops/update/${shopId}`,
       body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+      
     );
   },
   getAllshop: async function () {
@@ -36,7 +32,7 @@ export const shopApi = {
   },
   deleteshop: async function (brandId: any) {
     return await axiosClient.delete(
-      `brands/delete/${brandId}`,
+      `shops/delete/${brandId}`,
     );
   },
   getBrandsForshop: async function () {
