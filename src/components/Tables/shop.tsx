@@ -8,30 +8,30 @@ import Delete from "@/components/Confirmation/Delete";
 // import ShopTable from "/shop";
 
 type Props = {
-  listOfUniversity: [];
+  listOfShops: [];
 };
 
-const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const ShopTable = ({ listOfShops }: Props) => {
+  // const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const itemsPerPage = 5;
 
-  const filteredBrands = listOfBrands.filter((brandItem: any) =>
-    brandItem.brandName.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  // const filteredBrands = listOfBrands.filter((brandItem: any) =>
+  //   brandItem.brandName.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
 
-  const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
-  const brandData = filteredBrands.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  // const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
+  // const brandData = filteredBrands.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage,
+  // );
 
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
+  // const handlePageChange = (pageNumber: number) => {
+  //   if (pageNumber >= 1 && pageNumber <= totalPages) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // };
 
   const router = useRouter();
   // router.refresh();
@@ -81,14 +81,14 @@ const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
                         />
                       </svg>
                     </div>
-                    <input
+                    {/* <input
                       type="search"
                       id="default-search"
                       className="block w-full rounded-lg border  border-gray-300 bg-gray-50 p-1 px-20 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                       placeholder="Search Shop"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                    />
+                    /> */}
                   </div>
                 </form>
               </div>
@@ -104,17 +104,17 @@ const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                    Shop ID
+                    Shop Name
                     </th>
                     <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Shop Name
+                      Owner Name
                     </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                    Owner name
+                    User name
                     </th>
                     
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Status
+                      Address
                     </th>
                     <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
@@ -123,47 +123,47 @@ const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {brandData.map((packageItem: any, index:number) => (
+                  {listOfShops.map((shops: any, index:number) => (
                     <tr key={index}>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h5 className="text-dark dark:text-white">
-                          {packageItem.brandName}
+                          {shops.shopName}
                         </h5>
                         {/* <p className="mt-[3px] text-body-sm font-medium">
                     ${packageItem.price}
                   </p> */}
                       </td>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.brandDescription}
+                          {shops.ownerName}
                         </p>
                       </td>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.brandDescription}
+                          {shops.userName}
                         </p>
                       </td>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.brandDescription}
+                          {shops.address}
                         </p>
                       </td>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       ></td>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
-                          <Link href={`/shop/edit/${packageItem._id}`}>
+                          <Link href={`/admin/shop/edit/${shops._id}`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="20"
@@ -184,13 +184,13 @@ const ShopTable = ({ listOfUniversity: listOfBrands }: Props) => {
                           </Link>
                           <button
                             className="hover:text-primary"
-                            onClick={() => setItemId(packageItem._id)}
+                            onClick={() => setItemId(shops._id)}
                           >
-                            {itemId === packageItem._id && (
+                            {itemId === shops._id && (
                               <Delete
                                 deleteId={deleteBrand}
-                                id={packageItem._id}
-                                isOpen={itemId === packageItem._id}
+                                id={shops._id}
+                                isOpen={itemId === shops._id}
                                 setIsOpen={setItemId}
                               />
                             )}

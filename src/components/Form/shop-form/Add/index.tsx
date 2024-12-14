@@ -30,7 +30,6 @@ import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdown
 import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
-  shopId: z.string().trim().min(1, { message: "Shop Id is required." }),
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
@@ -84,19 +83,16 @@ const ShopAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-
+console.log(errors)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
       const response = await shopApi.createshop(data);
-
       if (response.data.success == true) {
 
-        toast.success('Brand Added Successfully.')
-        router.push("/tables/brands");
+        toast.success('Shop Added Successfully.')
+        router.push("/admin/shop");
       }
-      toast.success('Shop Added Successfully.')
-      router.push("/shop");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -120,22 +116,7 @@ const ShopAddForm = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Shop Id
-                  </label>
-                  <input
-                    {...register("shopId")}
-                    type="text"
-                    placeholder="Shop Id"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.shopId && (
-                    <p className="text-sm text-red-600">
-                      {errors.shopId.message}
-                    </p>
-                  )}
-                </div>
+               
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

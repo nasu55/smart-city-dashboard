@@ -58,7 +58,14 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const ShopEditForm = () => {
+type Props = {
+  shop: any;
+  shopId: string;
+};
+
+const ShopEditForm = ({shopId,shop}: Props) => {
+  console.log("shop id:::::",shopId);
+  console.log("shop ::::::",shop);
 
 
   const [internal, setInternal] = useState(false);
@@ -87,12 +94,12 @@ const ShopEditForm = () => {
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+      // const response = await shopApi.createBrand(formData);
 
       // if (response.data.success == true) {
 
       //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
+      // router.push("/admin/brands");
       // }
       toast.success('Shop Added Successfully.')
       router.push("/tables/shop");

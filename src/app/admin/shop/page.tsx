@@ -6,6 +6,7 @@ import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
 import { PackageNavigation } from "@/types/packageNavigation";
 import ShopTable from "@/components/Tables/shop";
+import { shopApi } from "@/api/shopApi";
 
 export const metadata: Metadata = {
   title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
@@ -23,9 +24,9 @@ const packageData: PackageNavigation[] = [
   },
 ];
 
-async function getAllBrands() {
+async function getAllShops() {
 try {
-  const response = await brandApi.getAllBrands();
+  const response = await shopApi.getAllshop();
   return response.data;
 } catch (error:any) {
   // console.log(error)
@@ -33,19 +34,15 @@ try {
 }}
 
 const TablesPage = async () => {
-  // const response = await getAllBrands()
-  // const brands = response.data.brands
-  const brands: any = [{
-    _id:1,
-    brandName:'abc',
-    brandDescription:'desc'
+  const response = await getAllShops()
 
-  }]
+  const shops = response.data.shops
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Shops" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <ShopTable listOfUniversity={brands}/>
+        <ShopTable listOfShops={shops}/>
       </div>
     </DefaultLayout>
   );

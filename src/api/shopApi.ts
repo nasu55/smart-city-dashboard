@@ -26,12 +26,12 @@ export const shopApi = {
   getAllshop: async function () {
     
     return await axiosClient.get(
-      "brands/getAll/",
+      "shops/all/",
     );
   },
   getshop: async function (brandId: any) {
     return await axiosClient.get(
-      `brands/getBrand/${brandId}`,
+      `shops/view/${brandId}`,
     );
   },
   deleteshop: async function (brandId: any) {
