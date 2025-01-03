@@ -3,7 +3,7 @@ import { axiosClient } from "./config/axiosConfig";
 export const usersApi = {
   createusers: async function (body: any) {
     return await axiosClient.post(
-      "brands/",
+      "users/create",
       body,
       {
         headers: {
@@ -14,7 +14,7 @@ export const usersApi = {
   },
   update: async function (userId: any, body: any) {
     return await axiosClient.put(
-      `brands/update/${brandId}`,
+      `brands/update/${userId}`,
       body,
       {
         headers: {
@@ -26,17 +26,17 @@ export const usersApi = {
   getAllusers: async function () {
     
     return await axiosClient.get(
-      "brands/getAll/",
+      "users/getAll/",
     );
   },
   getusers: async function (userId: any) {
     return await axiosClient.get(
-      `brands/getBrand/${brandId}`,
+      `users/getBrand/${userId}`,
     );
   },
   deleteusers: async function (userId: any) {
     return await axiosClient.delete(
-      `brands/delete/${brandId}`,
+      `brands/delete/${userId}`,
     );
   },
   getusersForProduct: async function () {

@@ -29,7 +29,6 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  userId: z.string().trim().min(1, { message: "User Id is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
@@ -120,22 +119,7 @@ const UserEditForm = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    User Id
-                  </label>
-                  <input
-                    {...register("userId")}
-                    type="text"
-                    placeholder="User Id"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.userId && (
-                    <p className="text-sm text-red-600">
-                      {errors.userId.message}
-                    </p>
-                  )}
-                </div>
+
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

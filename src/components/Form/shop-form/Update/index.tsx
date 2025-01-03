@@ -30,7 +30,6 @@ import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdown
 import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
-  shopId: z.string().trim().min(1, { message: "Shop Id is required." }),
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
@@ -101,6 +100,7 @@ const ShopEditForm = ({shopId,shop}: Props) => {
 
     }
    });
+   console.log(errors)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)

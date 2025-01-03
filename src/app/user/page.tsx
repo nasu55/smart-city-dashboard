@@ -6,6 +6,7 @@ import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
 import { PackageNavigation } from "@/types/packageNavigation";
 import UserTable from "@/components/Tables/user";
+import { usersApi } from "@/api/usersApi";
 
 export const metadata: Metadata = {
   title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
@@ -25,7 +26,7 @@ const packageData: PackageNavigation[] = [
 
 async function getAllBrands() {
 try {
-  const response = await brandApi.getAllBrands();
+  const response = await usersApi.getAllusers();
   return response.data;
 } catch (error:any) {
   // console.log(error)
