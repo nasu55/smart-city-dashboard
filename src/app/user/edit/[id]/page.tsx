@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
-import UserAddForm from "@/components/Form/User-form/Add";
+import UserAddForm from "@/components/Form/user-form/Add";
 import UserEditForm from "@/components/Form/user-form/Update";
 
 
