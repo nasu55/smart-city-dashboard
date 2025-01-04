@@ -31,6 +31,8 @@ import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   categoryName: z.string().trim().min(1, { message: "Shop Id is required." }),
+  image: z.any(),
+
   
 });
 const MAX_FILE_SIZE = 5000000;

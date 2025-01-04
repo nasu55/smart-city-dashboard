@@ -34,7 +34,7 @@ try {
 
 const TablesPage = async () => {
   const response = await getAllProducts()
-  const products = response.data.products
+  const products = response?.data.products
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Products" navigation={packageData}/>

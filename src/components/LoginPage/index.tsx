@@ -28,14 +28,13 @@ const LoginPage = () => {
     try {
       const response = await adminApi.adminLogin(data);
       if (response.data.success) {
-        window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
-        Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
-        router.push("/");
-        router.refresh();
+        // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
+        // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
         toast.success(response.data.message);
+        router.push("/admin/shop");
+
       }
-      toast.error(response.data.message);
-    } catch (error: any) {
+       } catch (error: any) {
       toast.error(error.message);
     }
   };

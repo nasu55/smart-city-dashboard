@@ -5,18 +5,22 @@ export const shopApi = {
     return await axiosClient.post(
       "shops/create",
       body,
-      // {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
   },
   updateshop: async function (shopId: any, body: any) {
     return await axiosClient.put(
       `shops/update/${shopId}`,
       body,
-      
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
   },
   getAllshop: async function () {

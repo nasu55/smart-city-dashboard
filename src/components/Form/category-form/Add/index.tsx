@@ -31,6 +31,7 @@ import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   categoryName: z.string().trim().min(1, { message: "Category Id is required." }),
+  image: z.any(),
   
 });
 const MAX_FILE_SIZE = 5000000;
@@ -137,7 +138,7 @@ const CategoryAddForm = () => {
               
                 <div>
                   <DropzoneWrapper>
-                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
@@ -153,7 +154,7 @@ const CategoryAddForm = () => {
                         </div>
                       )}
                     />
-
+{/* 
                     <div>
                       <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                         Dean/Director Name
@@ -169,7 +170,7 @@ const CategoryAddForm = () => {
                           {errors.universityName.message}
                         </p>
                       )}
-                    </div> */}
+                    </div>  */}
 
                     {/* <div>
                   <SelectDropdown

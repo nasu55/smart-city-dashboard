@@ -18,23 +18,10 @@ const ProductTable = ({ listOfProducts }: Props) => {
   console.log("first", listOfProducts);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+ 
 
-  const filteredProducts = listOfProducts.filter((productItem: any) =>
-    productItem.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const productData = filteredProducts.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
+ 
   const router = useRouter();
   // router.refresh();
 
@@ -67,7 +54,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
   return (
     <>
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        {productData.length > 0 ? (
+        {listOfProducts?.length > 0 ? (
           <>
             <div className="ml-7 flex justify-between">
               <div>
@@ -141,7 +128,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {productData.map((packageItem: any, index: any) => (
+                  {listOfProducts?.map((packageItem: any, index: any) => (
                     <tr key={index}>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
@@ -319,27 +306,6 @@ const ProductTable = ({ listOfProducts }: Props) => {
               </table>
             </div>
 
-            <div className="mt-4 flex items-center justify-between">
-              <button
-                className="ml-7 rounded bg-black px-3 pb-1 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-black"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                &laquo;
-              </button>
-
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                className="mr-7 rounded bg-black px-3 pb-1 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-black"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                &raquo;
-              </button>
-            </div>
           </>
         ) : (
           <div className="flex w-full flex-col items-center justify-center">

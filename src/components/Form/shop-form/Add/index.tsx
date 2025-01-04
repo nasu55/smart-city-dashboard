@@ -245,7 +245,7 @@ console.log(errors)
                 <div>
                   <DropzoneWrapper>
                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      University Logo
+                      Image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
