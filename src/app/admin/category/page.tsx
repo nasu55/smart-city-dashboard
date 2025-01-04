@@ -23,9 +23,9 @@ const packageData: PackageNavigation[] = [
   },
 ];
 
-async function getAllProducts() {
+async function getAllCategory() {
 try {
-  const response = await productApi.getAllProducts();
+  const response = await categoryApi.getAllCategory();
   return response?.data;
 } catch (error:any) {
   // toast.error(error.message)
@@ -34,13 +34,13 @@ try {
 }
 
 const TablesPage = async () => {
-  const response = await getAllProducts()
-  const products = response?.data?.products
+  const response = await getAllCategory()
+  const categories = response?.data?.products
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Products" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <CategoryTable listOfProducts={products}/>
+        <CategoryTable listOfCategories={categories}/>
       </div>
     </DefaultLayout>
   );

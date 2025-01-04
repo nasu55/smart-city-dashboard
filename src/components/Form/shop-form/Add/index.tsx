@@ -31,6 +31,7 @@ import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
+  image: z.any(),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
@@ -243,14 +244,14 @@ console.log(errors)
               
                 <div>
                   <DropzoneWrapper>
-                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
-                      {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
+                      {!!errors.image && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='University Logo'
+                      name='image'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
@@ -260,22 +261,6 @@ console.log(errors)
                       )}
                     />
 
-                    <div>
-                      <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                        Dean/Director Name
-                      </label>
-                      <input
-                        {...register("dean/director Name")}
-                        type="text"
-                        placeholder="Dean/Director Name"
-                        className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                      />
-                      {errors.universityName && (
-                        <p className="text-sm text-red-600">
-                          {errors.universityName.message}
-                        </p>
-                      )}
-                    </div> */}
 
                     {/* <div>
                   <SelectDropdown
