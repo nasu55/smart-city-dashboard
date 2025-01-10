@@ -1,4 +1,3 @@
-"use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,8 +29,10 @@ import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdown
 import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
-  categoryName: z.string().trim().min(1, { message: "Shop Id is required." }),
-  
+  productName: z.string().trim().min(1, { message: "Shop Name is required." }),
+  image: z.any(),
+  descripton: z.string().trim().min(1, { message: "Owner Name is required." }),
+  price: z.string().trim().min(1, { message: "user Name is required." }),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -44,8 +45,8 @@ const navigationData: PackageNavigation[] = [
     link: '/'
   },
   {
-    name: 'Category / ',
-    link: '/categories'
+    name: 'Products / ',
+    link: '/Product'
   },
   {
     name: 'Add ',
@@ -78,19 +79,16 @@ const ProductAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-
+console.log(errors)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
       const response = await shopApi.createshop(data);
-
       if (response.data.success == true) {
 
-        toast.success('Brand Added Successfully.')
-        router.push("/tables/brands");
+        toast.success('Shop Added Successfully.')
+        router.push("/shop-admin/Product");
       }
-      toast.success('Shop Added Successfully.')
-      router.push("/shop");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -101,7 +99,7 @@ const ProductAddForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="ADD SHOP" navigation={navigationData} />
+      <Breadcrumb pageName="ADD PRODUCT" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -110,41 +108,77 @@ const ProductAddForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Category
+                  Add PRODUCT
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
+               
+
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Category name
+                    Shop Name
                   </label>
                   <input
-                    {...register("categoryName")}
+                    {...register("productName")}
                     type="text"
-                    placeholder="Shop Id"
+                    placeholder="Product Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.categoryName && (
+                  {errors.productName && (
                     <p className="text-sm text-red-600">
-                      {errors.categoryName.message}
+                      {errors.productName.message}
                     </p>
                   )}
                 </div>
 
-                
-  
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Description
+                  </label>
+                  <input
+                    {...register("descripton")}
+                    type="text"
+                    placeholder="Description"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.descripton && (
+                    <p className="text-sm text-red-600">
+                      {errors.descripton.message}
+                    </p>
+                  )}
+                </div>
 
+
+
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Price
+                  </label>
+                  <input
+                    {...register("price")}
+                    type="text"
+                    placeholder="Price"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.price && (
+                    <p className="text-sm text-red-600">
+                      {errors.price.message}
+                    </p>
+                  )}
+                </div>
+
+               
               
                 <div>
                   <DropzoneWrapper>
-                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      University Logo
-                      {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
+                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                      Image
+                      {!!errors.image && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='University Logo'
+                      name='image'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
@@ -154,22 +188,6 @@ const ProductAddForm = () => {
                       )}
                     />
 
-                    <div>
-                      <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                        Dean/Director Name
-                      </label>
-                      <input
-                        {...register("dean/director Name")}
-                        type="text"
-                        placeholder="Dean/Director Name"
-                        className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                      />
-                      {errors.universityName && (
-                        <p className="text-sm text-red-600">
-                          {errors.universityName.message}
-                        </p>
-                      )}
-                    </div> */}
 
                     {/* <div>
                   <SelectDropdown
