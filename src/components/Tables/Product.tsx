@@ -25,18 +25,18 @@ const ProductTable = ({ listOfProducts }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-  async function featuredProduct(productId: any) {
-    try {
-      const featuredProduct = await productApi.featuredProduct(productId);
+  // async function featuredProduct(productId: any) {
+  //   try {
+  //     const featuredProduct = await productApi.featuredProduct(productId);
 
-      if (featuredProduct.data.success) {
-        toast.success(featuredProduct.data.message);
-        router.refresh();
-      }
-    } catch (errors: any) {
-      toast.error(errors.message);
-    }
-  }
+  //     if (featuredProduct.data.success) {
+  //       toast.success(featuredProduct.data.message);
+  //       router.refresh();
+  //     }
+  //   } catch (errors: any) {
+  //     toast.error(errors.message);
+  //   }
+  // }
 
   async function deleteProduct(id: any) {
     try {
@@ -54,7 +54,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
   return (
     <>
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        {listOfProducts?.length > 0 ? (
+        {/* {listOfProducts?.length > 0 ? ( */}
           <>
             <div className="ml-7 flex justify-between">
               <div>
@@ -97,7 +97,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
 
               {/* <p className="ml-7 text-lg font-semibold">Items</p> */}
               <Link
-                href={"/tables/products/add"}
+                href={"/shop-admin/products/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
                 Add Product
@@ -108,19 +108,19 @@ const ProductTable = ({ listOfProducts }: Props) => {
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Name
+                     Product Name
                     </th>
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                      Brand
+                     Description
                     </th>
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                      Category
+                     MRP
                     </th>
                     {/* <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Sub-Category
                     </th> */}
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                      Featured
+                      Price
                     </th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
@@ -128,32 +128,32 @@ const ProductTable = ({ listOfProducts }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {listOfProducts?.map((packageItem: any, index: any) => (
+                  {listOfProducts?.map((products: any, index: any) => (
                     <tr key={index}>
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h5 className="text-dark dark:text-white">
-                          {packageItem.name}
+                        ₹{products.productName}
                         </h5>
-                        <p className="mt-[3px] text-body-sm font-medium">
-                          ₹{packageItem.price}
-                        </p>
+                        
+                      
+
                       </td>
-                      <td
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.brand.name}
                         </p>
-                      </td>
-                      <td
+                      </td> */}
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.category.name}
                         </p>
-                      </td>
+                      </td> */}
                       {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
@@ -161,7 +161,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
                           {packageItem.subCategory.name}
                         </p>
                       </td> */}
-                      <td 
+                      {/* <td 
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <label className="flex cursor-pointer select-none items-center">
@@ -180,15 +180,16 @@ const ProductTable = ({ listOfProducts }: Props) => {
                                 "!right-1 !translate-x-full !bg-primary dark:!bg-white"
                               }`}
                             ></div>
+                          
                           </div>
                         </label>
-                      </td>
+                      </td> */}
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
                           <Link
-                            href={`/tables/products/view/${packageItem._id}`}
+                            href={`/shop-admin/products/view/${products._id}`}
                           >
                             <button className="mt-[6px] hover:text-primary">
                               <svg
@@ -215,7 +216,7 @@ const ProductTable = ({ listOfProducts }: Props) => {
                             </button>
                           </Link>
                           <Link
-                            href={`/tables/products/edit/${packageItem._id}`}
+                            href={`/shop-admin/products/edit/${products._id}`}
                           >
                             <button className="hover:text-primary">
                               <svg
@@ -240,13 +241,13 @@ const ProductTable = ({ listOfProducts }: Props) => {
                           </Link>
                           <button
                             className="hover:text-primary"
-                            onClick={() => setItemId(packageItem._id)}
+                            onClick={() => setItemId(products._id)}
                           >
-                            {itemId === packageItem._id && (
+                            {itemId === products._id && (
                               <Delete
                                 deleteId={deleteProduct}
-                                id={packageItem._id}
-                                isOpen={itemId === packageItem._id}
+                                id={products._id}
+                                isOpen={itemId === products._id}
                                 setIsOpen={setItemId}
                               />
                             )}
@@ -307,17 +308,17 @@ const ProductTable = ({ listOfProducts }: Props) => {
             </div>
 
           </>
-        ) : (
-          <div className="flex w-full flex-col items-center justify-center">
-            <p className="text-lg text-red-600">Data not found</p>
-            <Link
-              href={"/tables/products/add"}
-              className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
-            >
-              Add Product
-            </Link>
-          </div>
-        )}
+        {/* // ) : (
+        //   <div className="flex w-full flex-col items-center justify-center">
+        //     <p className="text-lg text-red-600">Data not found</p>
+        //     <Link
+        //       href={"/shop-admin/products/add"}
+        //       className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
+        //     >
+        //       Add Product
+        //     </Link>
+        //   </div>
+        // )} */}
       </div>
     </>
   );

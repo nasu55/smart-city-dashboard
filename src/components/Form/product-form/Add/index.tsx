@@ -1,3 +1,4 @@
+'use client'
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,13 +27,15 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
-import { shopApi } from "@/api/shopApi";
+import { productApi } from "@/api/productApi";
+// import { productApi } from "@/api/productApi";
 
 const mySchema = z.object({
-  productName: z.string().trim().min(1, { message: "Shop Name is required." }),
+  productName: z.string().trim().min(1, { message: "Product Name is required." }),
   image: z.any(),
-  descripton: z.string().trim().min(1, { message: "Owner Name is required." }),
-  price: z.string().trim().min(1, { message: "user Name is required." }),
+  descripton: z.string().trim().min(1, { message: "description is required." }),
+  price: z.string().trim().min(1, { message: "price is required." }),
+  mrp: z.string().trim().min(1, { message: "price is required." }),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -46,7 +49,7 @@ const navigationData: PackageNavigation[] = [
   },
   {
     name: 'Products / ',
-    link: '/Product'
+    link: '/Products'
   },
   {
     name: 'Add ',
@@ -54,8 +57,9 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const ProductAddForm = () => {
-
+const ProductAddForm = (categoryList:any) => {
+ 
+console.log(categoryList)
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -79,15 +83,15 @@ const ProductAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-console.log(errors)
+
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      const response = await shopApi.createshop(data);
+      const response = await productApi.createproduct(data);
       if (response.data.success == true) {
 
-        toast.success('Shop Added Successfully.')
-        router.push("/shop-admin/Product");
+        toast.success('Product Added Successfully.')
+        router.push("/shop-admin/products");
       }
     } catch (error: any) {
       if (error.response.status == 404) {
@@ -116,7 +120,7 @@ console.log(errors)
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Shop Name
+                    Product Name
                   </label>
                   <input
                     {...register("productName")}
@@ -148,6 +152,24 @@ console.log(errors)
                   )}
                 </div>
 
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    MRP
+                  </label>
+                  <input
+                    {...register("mrp")}
+                    type="text"
+                    placeholder="MRP"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.mrp && (
+                    <p className="text-sm text-red-600">
+                      {errors.mrp.message}
+                    </p>
+                  )}
+                </div>
+
+
 
 
                 <div>
@@ -171,8 +193,8 @@ console.log(errors)
               
                 <div>
                   <DropzoneWrapper>
-                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      Image
+                   <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                      Product image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
@@ -183,24 +205,13 @@ console.log(errors)
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
                         </div>
                       )}
                     />
 
 
-                    {/* <div>
-                  <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
-                    name={" country"}
-                    register={register("productBrand")}
-                  />
-                  {errors.universityName && (
-                    <p className="text-sm text-red-600">
-                      {errors.universityName.message}
-                    </p>
-                  )}
-                </div> */}
+                 
 
                    
 

@@ -139,7 +139,7 @@ const CategoryUpdateForm = () => {
               
                 <div>
                   <DropzoneWrapper>
-                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
@@ -171,34 +171,16 @@ const CategoryUpdateForm = () => {
                           {errors.universityName.message}
                         </p>
                       )}
-                    </div> */}
+                    </div>
 
-                    {/* <div>
-                  <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
-                    name={" country"}
-                    register={register("productBrand")}
-                  />
-                  {errors.universityName && (
-                    <p className="text-sm text-red-600">
-                      {errors.universityName.message}
-                    </p>
-                  )}
-                </div> */}
+           
 
                    
 
                    
 
                   </DropzoneWrapper>
-                  {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Brand Logo
-                  </label>
-                  <input
-                    {...register("brandLogo")}
-                    type="file"
-                    className="w-full cursor-pointer rounded-[7px] border-[1.5px] border-stroke bg-transparent outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-[#E2E8F0] file:px-6.5 file:py-[13px] file:text-body-sm file:font-medium file:text-dark-5 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-dark dark:border-dark-3 dark:bg-dark-2 dark:file:border-dark-3 dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary"
-                  /> */}
+               
                 </div>
                 {/* <Link href={"/"}> */}
                 <button

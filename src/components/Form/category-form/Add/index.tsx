@@ -139,18 +139,18 @@ const CategoryAddForm = () => {
                 <div>
                   <DropzoneWrapper>
                      <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      University Logo
-                      {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
+                      Category image
+                      {!!errors.image && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='University Logo'
+                      name='image'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
                         </div>
                       )}
                     />

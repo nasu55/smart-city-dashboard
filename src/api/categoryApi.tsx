@@ -24,7 +24,7 @@ export const categoryApi = {
   },
   getAllCategories: async function () {
     return await axiosClient.get(
-      "categories/getAll/",
+      "categories/all/",
     );
   },
   getCategory: async function (categoryId: any) {

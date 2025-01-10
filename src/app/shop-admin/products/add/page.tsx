@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { brandApi } from "@/api/brandApi";
 import { categoryApi } from "@/api/categoryApi";
 import { subCategoryApi } from "@/api/subCategoryApi";
+import ProductAddForm from "@/components/Form/product-form/Add";
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements Page | NextAdmin - Next.js Dashboard Kit",
@@ -13,26 +14,21 @@ export const metadata: Metadata = {
 
 async function getProduct() {
   try {
-    const listOfBrands: any = await brandApi.getBrandsForProduct();
-    const listOfCategories: any = await categoryApi.getCategoriesForProduct();
-    const listOfSubCategories: any = await subCategoryApi.getSubCategoriesForProduct();
-    return { listOfBrands: listOfBrands.data , listOfCategories:listOfCategories.data,listOfSubCategories:listOfSubCategories.data };
+    const listOfCategories: any = await categoryApi.getAllCategories();
+    return { listOfCategories:listOfCategories.data};
 
   } catch (error: any) {  
     console.log(error);
-    toast.error(error.message);
   }
 }
 
 const FormElementsPage = async () => {
   const response :any= await getProduct();
-  const brands = response.listOfBrands.data;
   const categories = response.listOfCategories.data;
-  const subCategories = response.listOfSubCategories.data;
 
   return (
     <DefaultLayout>
-      <ProductForm brandList={brands} categoryList={categories} subCategoryList={subCategories}/>
+      <ProductAddForm categoryList={categories} />
     </DefaultLayout>
   );
 };
