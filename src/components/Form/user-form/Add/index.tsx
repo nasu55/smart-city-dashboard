@@ -29,10 +29,9 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  userName: z.string().trim().min(1, { message: "user Name is required." }),
+  email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
   //   .refine(
@@ -120,29 +119,30 @@ const UserAddForm = () => {
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
 
-                <div>
+              <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    User Name
+                    Email-Id
                   </label>
                   <input
-                    {...register("userName")}
-                    type="text"
-                    placeholder="User Name"
+                    {...register("email_Id")}
+                    type="email"
+                    placeholder="Email-Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.userName && (
+                  {errors.email_Id && (
                     <p className="text-sm text-red-600">
-                      {errors.userName.message}
+                      {errors.email_Id.message}
                     </p>
                   )}
                 </div>
+
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Password
                   </label>
                   <input
                     {...register("password")}
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
@@ -170,22 +170,7 @@ const UserAddForm = () => {
                 </div>
 
 
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
-                  </label>
-                  <input
-                    {...register("email_Id")}
-                    type="email"
-                    placeholder="Email-Id"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.email_Id && (
-                    <p className="text-sm text-red-600">
-                      {errors.email_Id.message}
-                    </p>
-                  )}
-                </div>
+
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

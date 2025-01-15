@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import ProductView from "@/components/Form/Product-form/View";
+// import ProductView from "@/components/Form/Product-form/View";
 import { productApi } from "@/api/productApi";
 import toast from "react-hot-toast";
 

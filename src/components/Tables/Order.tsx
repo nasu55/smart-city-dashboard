@@ -1,107 +1,60 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { categoryApi } from "@/api/categoryApi";
-import { useRouter } from "next/navigation";
+import FeaturedSwitch from "../FormElements/Switchers/FeaturedSwitch";
+import { Key, useState } from "react";
+import { productApi } from "@/api/productApi";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import Delete from "@/components/Confirmation/Delete";
 
-// const packageData: PackageCategory[] = [
-//   {
-//     name: "Men",
-//     image: "",
-//     description: "Blahhh",
-//   },
-//   {
-//     name: "Women",
-//     image: "",
-//     description: "Blahhh Blahhh Blahhh Blahhh Blahhh Blahhh ",
-//   },
-//   {
-//     name: "Kids",
-//     image: "",
-//     description: "",
-//   },
-//   {
-//     name: "Accessories",
-//     image: "",
-//     description: "",
-//   },
-// ];
-
 type Props = {
-  listOfCategories: [];
+  listOfProducts: any;
 };
 
-const CategoryTable = ({ listOfCategories }: Props) => {
+const OrderTable = ({ listOfOrders }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState();
 
+  console.log("first", listOfOrders);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+ 
 
-  const filteredCategories = listOfCategories?.filter((categoryItem: any) =>
-    categoryItem.categoryName.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
 
-  const totalPages = Math.ceil(filteredCategories?.length / itemsPerPage);
-  const categoryData = filteredCategories?.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
+ 
   const router = useRouter();
   // router.refresh();
 
-  async function deleteCategory(id: any) {
-    try {
-      const responseDelete = await categoryApi.deleteCategory(id);
-      // console.log('first',responseDelete.data.response)
+  // async function featuredProduct(productId: any) {
+  //   try {
+  //     const featuredProduct = await productApi.featuredProduct(productId);
 
-      if (responseDelete.data.success == true) {
-        toast.success(responseDelete.data.message);
-        router.refresh();
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message);
-    }
-  }
+  //     if (featuredProduct.data.success) {
+  //       toast.success(featuredProduct.data.message);
+  //       router.refresh();
+  //     }
+  //   } catch (errors: any) {
+  //     toast.error(errors.message);
+  //   }
+  // }
+
+  // async function deleteProduct(id: any) {
+  //   try {
+  //     const responseDelete = await productApi.deleteProduct(id);
+
+  //     if (responseDelete.data.success) {
+  //       toast.success(responseDelete.data.message);
+  //       router.refresh();
+  //     }
+  //   } catch (error: any) {
+  //     toast.error(error.message);
+  //   }
+  // }
 
   return (
     <>
-      {/* {deleteConfirm && (
-        <div
-          className="rounded-b border-t-4 border-teal-500 bg-teal-100 px-4 py-3 text-teal-900 shadow-md"
-          role="alert"
-        >
-          <div className="flex">
-            <div className="py-1">
-              <svg
-                className="mr-4 h-6 w-6 fill-current text-teal-500"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-bold">Alert!!!</p>
-              <p className="text-sm">
-                Brand Deleted Successfully.
-              </p>
-            </div>
-          </div>
-        </div>
-      )} */}
-
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        {categoryData?.length > 0 ? 
+        {/* {listOfProducts?.length > 0 ? ( */}
           <>
             <div className="ml-7 flex justify-between">
               <div>
@@ -134,7 +87,7 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                       type="search"
                       id="default-search"
                       className="block w-full rounded-lg border  border-gray-300 bg-gray-50 p-1 px-20 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                      placeholder="Search Category"
+                      placeholder="Search Order"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -143,58 +96,159 @@ const CategoryTable = ({ listOfCategories }: Props) => {
               </div>
 
               {/* <p className="ml-7 text-lg font-semibold">Items</p> */}
-              <Link
-                href={"/admin/category/add"}
+              {/* <Link
+                href={"/shop-admin/products/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
-                Add Category
-              </Link>
+                Add Product
+              </Link> */}
             </div>
             <div className="max-w-full overflow-x-auto">
               <table className="w-full table-auto">
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Name
+                     Order Id
+                    </th>
+                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Order Date
+                    </th>
+                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Address
                     </th>
 
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
-                      Description
+                     Total Amount
                     </th>
-
-                    <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
+                    {/* <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Sub-Category
+                    </th> */}
+                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Contact
+                    </th>
+                    
+                    {/* <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {categoryData.map((packageItem: any, index) => (
+                  {listOfOrders?.map((orders: any, index: any) => (
                     <tr key={index}>
-                      <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === categoryData.length - 1 ? "border-b-0" : "border-b"}`}
+
+
+                      {/* <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h5 className="text-dark dark:text-white">
-                          {packageItem.categoryName}
+                        {orders.productName}
                         </h5>
-                      </td>
-
+                        </td>
+                     
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === categoryData.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {orders.mrp}
+                        </h5>
+                        </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {orders.price}
+                        </h5>
+                        </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {orders.quantity}
+                        </h5>
+                        </td> */}
+
+
+                      {/* <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.categoryDescription}
+                          {packageItem.brand.name}
                         </p>
-                      </td>
-
+                      </td> */}
+                      {/* <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <p className="text-dark dark:text-white">
+                          {packageItem.category.name}
+                        </p>
+                      </td> */}
+                      {/* <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <p className="text-dark dark:text-white">
+                          {packageItem.subCategory.name}
+                        </p>
+                      </td> */}
+                      {/* <td 
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <label className="flex cursor-pointer select-none items-center">
+                          <div className="relative">
+                            <input
+                              type="checkbox"
+                              className="sr-only"
+                              onChange={async () => {
+                                await featuredProduct(packageItem._id);
+                              }}
+                            />
+                            <div className="block h-8 w-14 rounded-full bg-gray-3 dark:bg-[#5A616B]"></div>
+                            <div
+                              className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-white shadow-switch-1 transition ${
+                                packageItem.featured &&
+                                "!right-1 !translate-x-full !bg-primary dark:!bg-white"
+                              }`}
+                            ></div>
+                          
+                          </div>
+                        </label>
+                      </td> */}
                       <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === categoryData.length - 1 ? "border-b-0" : "border-b"}`}
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
                           <Link
-                            href={`/admin/categories/edit/${packageItem._id}`}
+                            href={`/shop-admin/products/view/${orders._id}`}
+                          >
+                            <button className="mt-[6px] hover:text-primary">
+                              <svg
+                                className="fill-current"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M9.99935 6.87492C8.27346 6.87492 6.87435 8.27403 6.87435 9.99992C6.87435 11.7258 8.27346 13.1249 9.99935 13.1249C11.7252 13.1249 13.1243 11.7258 13.1243 9.99992C13.1243 8.27403 11.7252 6.87492 9.99935 6.87492ZM8.12435 9.99992C8.12435 8.96438 8.96382 8.12492 9.99935 8.12492C11.0349 8.12492 11.8743 8.96438 11.8743 9.99992C11.8743 11.0355 11.0349 11.8749 9.99935 11.8749C8.96382 11.8749 8.12435 11.0355 8.12435 9.99992Z"
+                                  fill=""
+                                />
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M9.99935 2.70825C6.23757 2.70825 3.70376 4.96175 2.23315 6.8723L2.20663 6.90675C1.87405 7.3387 1.56773 7.73652 1.35992 8.20692C1.13739 8.71064 1.04102 9.25966 1.04102 9.99992C1.04102 10.7402 1.13739 11.2892 1.35992 11.7929C1.56773 12.2633 1.87405 12.6611 2.20664 13.0931L2.23316 13.1275C3.70376 15.0381 6.23757 17.2916 9.99935 17.2916C13.7611 17.2916 16.2949 15.0381 17.7655 13.1275L17.792 13.0931C18.1246 12.6612 18.431 12.2633 18.6388 11.7929C18.8613 11.2892 18.9577 10.7402 18.9577 9.99992C18.9577 9.25966 18.8613 8.71064 18.6388 8.20692C18.431 7.73651 18.1246 7.33868 17.792 6.90673L17.7655 6.8723C16.2949 4.96175 13.7611 2.70825 9.99935 2.70825ZM3.2237 7.63475C4.58155 5.87068 6.79132 3.95825 9.99935 3.95825C13.2074 3.95825 15.4172 5.87068 16.775 7.63475C17.1405 8.10958 17.3546 8.3933 17.4954 8.71204C17.627 9.00993 17.7077 9.37403 17.7077 9.99992C17.7077 10.6258 17.627 10.9899 17.4954 11.2878C17.3546 11.6065 17.1405 11.8903 16.775 12.3651C15.4172 14.1292 13.2074 16.0416 9.99935 16.0416C6.79132 16.0416 4.58155 14.1292 3.2237 12.3651C2.85821 11.8903 2.64413 11.6065 2.50332 11.2878C2.37171 10.9899 2.29102 10.6258 2.29102 9.99992C2.29102 9.37403 2.37171 9.00993 2.50332 8.71204C2.64413 8.3933 2.85821 8.10958 3.2237 7.63475Z"
+                                  fill=""
+                                />
+                              </svg>
+                            </button>
+                          </Link>
+                          <Link
+                            href={`/shop-admin/products/edit/${orders._id}`}
                           >
                             <button className="hover:text-primary">
                               <svg
+                                className="fill-current"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"
@@ -211,41 +265,20 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                                   <path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3" />
                                 </g>
                               </svg>
-                              {/* <svg
-                        className="fill-current"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M9.99935 6.87492C8.27346 6.87492 6.87435 8.27403 6.87435 9.99992C6.87435 11.7258 8.27346 13.1249 9.99935 13.1249C11.7252 13.1249 13.1243 11.7258 13.1243 9.99992C13.1243 8.27403 11.7252 6.87492 9.99935 6.87492ZM8.12435 9.99992C8.12435 8.96438 8.96382 8.12492 9.99935 8.12492C11.0349 8.12492 11.8743 8.96438 11.8743 9.99992C11.8743 11.0355 11.0349 11.8749 9.99935 11.8749C8.96382 11.8749 8.12435 11.0355 8.12435 9.99992Z"
-                          fill=""
-                        />
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M9.99935 2.70825C6.23757 2.70825 3.70376 4.96175 2.23315 6.8723L2.20663 6.90675C1.87405 7.3387 1.56773 7.73652 1.35992 8.20692C1.13739 8.71064 1.04102 9.25966 1.04102 9.99992C1.04102 10.7402 1.13739 11.2892 1.35992 11.7929C1.56773 12.2633 1.87405 12.6611 2.20664 13.0931L2.23316 13.1275C3.70376 15.0381 6.23757 17.2916 9.99935 17.2916C13.7611 17.2916 16.2949 15.0381 17.7655 13.1275L17.792 13.0931C18.1246 12.6612 18.431 12.2633 18.6388 11.7929C18.8613 11.2892 18.9577 10.7402 18.9577 9.99992C18.9577 9.25966 18.8613 8.71064 18.6388 8.20692C18.431 7.73651 18.1246 7.33868 17.792 6.90673L17.7655 6.8723C16.2949 4.96175 13.7611 2.70825 9.99935 2.70825ZM3.2237 7.63475C4.58155 5.87068 6.79132 3.95825 9.99935 3.95825C13.2074 3.95825 15.4172 5.87068 16.775 7.63475C17.1405 8.10958 17.3546 8.3933 17.4954 8.71204C17.627 9.00993 17.7077 9.37403 17.7077 9.99992C17.7077 10.6258 17.627 10.9899 17.4954 11.2878C17.3546 11.6065 17.1405 11.8903 16.775 12.3651C15.4172 14.1292 13.2074 16.0416 9.99935 16.0416C6.79132 16.0416 4.58155 14.1292 3.2237 12.3651C2.85821 11.8903 2.64413 11.6065 2.50332 11.2878C2.37171 10.9899 2.29102 10.6258 2.29102 9.99992C2.29102 9.37403 2.37171 9.00993 2.50332 8.71204C2.64413 8.3933 2.85821 8.10958 3.2237 7.63475Z"
-                          fill=""
-                        />
-                      </svg> */}
                             </button>
                           </Link>
                           <button
                             className="hover:text-primary"
-                            onClick={() => setItemId(packageItem._id)}
+                            onClick={() => setItemId(orders._id)}
                           >
-                            {itemId === packageItem._id && (
+                            {/* {itemId === orders._id && (
                               <Delete
-                                deleteId={deleteCategory}
-                                id={packageItem._id}
-                                isOpen={itemId === packageItem._id}
+                                deleteId={deleteProduct}
+                                id={products._id}
+                                isOpen={itemId === products._id}
                                 setIsOpen={setItemId}
                               />
-                            )}
+                            )} */}
 
                             <svg
                               className="fill-current"
@@ -301,46 +334,22 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                 </tbody>
               </table>
             </div>
-            {/* {categoryData.length == 5 ? ( */}
-            <div className="mt-4 flex items-center justify-between">
-              <button
-                className="ml-7 rounded bg-black px-3 pb-1 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-black"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                &laquo;
-              </button>
 
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                className="mr-7 rounded bg-black px-3 pb-1 font-semibold text-white disabled:opacity-50 dark:bg-white dark:text-black"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                &raquo;
-              </button>
-            </div>
           </>
-      : 
-          <div className="flex w-full flex-col items-center justify-center">
-            <p className="text-lg text-red-600">Data not found</p>
-            <Link
-              href={"/admin/category/add"}
-              className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
-            >
-              Add Category
-            </Link>
-          </div>
-        }
-        {/* ) : (
-          ""
-        )} */}
+        {/* // ) : (
+        //   <div className="flex w-full flex-col items-center justify-center">
+        //     <p className="text-lg text-red-600">Data not found</p>
+        //     <Link
+        //       href={"/shop-admin/products/add"}
+        //       className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
+        //     >
+        //       Add Product
+        //     </Link>
+        //   </div>
+        // )} */}
       </div>
     </>
   );
 };
 
-export default CategoryTable;
+export default OrderTable;

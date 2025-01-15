@@ -31,13 +31,17 @@ import { shopApi } from "@/api/shopApi";
 
 const mySchema = z.object({
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
-  image: z.any(),
+  shopDescription: z.string().trim().min(1, { message: "Shop Description is required." }),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
+  email: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
+  shopImage: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  .refine(
+    (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -135,6 +139,22 @@ console.log(errors)
                     </p>
                   )}
                 </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Shop Description
+                  </label>
+                  <input
+                    {...register("shopDescription")}
+                    type="text"
+                    placeholder="Shop Description"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.shopDescription && (
+                    <p className="text-sm text-red-600">
+                      {errors.shopDescription.message}
+                    </p>
+                  )}
+                </div>
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -178,7 +198,7 @@ console.log(errors)
                   </label>
                   <input
                     {...register("password")}
-                    type="text"
+                    type="passsword"
                     placeholder="Password"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
@@ -209,17 +229,17 @@ console.log(errors)
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
+                    Email
                   </label>
                   <input
-                    {...register("email_Id")}
+                    {...register("email")}
                     type="email"
                     placeholder="Email-Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.email_Id && (
+                  {errors.email && (
                     <p className="text-sm text-red-600">
-                      {errors.email_Id.message}
+                      {errors.email.message}
                     </p>
                   )}
                 </div>
@@ -244,19 +264,19 @@ console.log(errors)
               
                 <div>
                   <DropzoneWrapper>
-                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                   <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                      Shop Image
-                      {!!errors.image && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
+                      {!!errors.shopImage && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.shopImage}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='image'
+                      name='shopImage'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.shopImage} />
                         </div>
                       )}
                     />

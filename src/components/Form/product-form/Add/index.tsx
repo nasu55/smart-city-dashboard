@@ -33,7 +33,7 @@ import { productApi } from "@/api/productApi";
 const mySchema = z.object({
   productName: z.string().trim().min(1, { message: "Product Name is required." }),
   image: z.any(),
-  descripton: z.string().trim().min(1, { message: "description is required." }),
+  description: z.string().trim().min(1, { message: "description is required." }),
   price: z.string().trim().min(1, { message: "price is required." }),
   mrp: z.string().trim().min(1, { message: "price is required." }),
 });
@@ -140,14 +140,14 @@ console.log(categoryList)
                     Description
                   </label>
                   <input
-                    {...register("descripton")}
+                    {...register("description")}
                     type="text"
                     placeholder="Description"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.descripton && (
+                  {errors.description && (
                     <p className="text-sm text-red-600">
-                      {errors.descripton.message}
+                      {errors.description.message}
                     </p>
                   )}
                 </div>

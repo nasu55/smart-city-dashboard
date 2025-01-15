@@ -28,11 +28,12 @@ import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 import { shopApi } from "@/api/shopApi";
+import { productApi } from "@/api/productApi";
 
 const mySchema = z.object({
     productName: z.string().trim().min(1, { message: "Product Name is required." }),
     image: z.any(),
-    descripton: z.string().trim().min(1, { message: "description is required." }),
+    description: z.string().trim().min(1, { message: "description is required." }),
     price: z.string().trim().min(1, { message: "price is required." }),
     mrp: z.string().trim().min(1, { message: "price is required." }),
 });
@@ -90,7 +91,7 @@ const ShopEditForm = ({productId,product}: Props) => {
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
     defaultValues:{
         productName:product.productName,
-        descripton:product.descripton,
+        description:product.description,
         price:product.price,
         mrp:product.mrp,
         image:product.image
@@ -104,11 +105,11 @@ const ShopEditForm = ({productId,product}: Props) => {
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      const response = await shopApi.updateshop(productId,data);
+      const response = await productApi.updateProduct(productId,data);
 
       if (response.data.success == true) {
 
-        toast.success('Shop Updated succefffully')
+        toast.success('Shop Updated succeSSfully')
         router.push("/admin/shop");
       }
     } catch (error: any) {
@@ -157,14 +158,14 @@ const ShopEditForm = ({productId,product}: Props) => {
                     Description
                   </label>
                   <input
-                    {...register("descripton")}
+                    {...register("description")}
                     type="text"
                     placeholder="Description"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.descripton && (
+                  {errors.description && (
                     <p className="text-sm text-red-600">
-                      {errors.descripton.message}
+                      {errors.description.message}
                     </p>
                   )}
                 </div>
@@ -193,7 +194,7 @@ const ShopEditForm = ({productId,product}: Props) => {
               
                 <div>
                   <DropzoneWrapper>
-                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                   <Typography  fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       Image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>

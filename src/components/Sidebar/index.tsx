@@ -169,7 +169,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Orders",
-        route: "/shop-admin/order",
+        route: "/shop-admin/orders",
        
       },
       

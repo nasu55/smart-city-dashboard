@@ -134,12 +134,30 @@ const ProductTable = ({ listOfProducts }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h5 className="text-dark dark:text-white">
-                        ₹{products.productName}
+                        {products.productName}
                         </h5>
-                        
-                      
-
-                      </td>
+                        </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {products.description}
+                        </h5>
+                        </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {products.mrp}
+                        </h5>
+                        </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === products.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <h5 className="text-dark dark:text-white">
+                        {products.price}
+                        </h5>
+                        </td>
                       {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
