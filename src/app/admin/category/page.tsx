@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import ProductTable from "@/components/Tables/Product";
-import { productApi } from "@/api/productApi";
+import { categoryApi } from "@/api/categoryApi";
 import { PackageNavigation } from "@/types/packageNavigation";
 import toast from "react-hot-toast";
 import CategoryTable from "@/components/Tables/Category";
@@ -18,14 +18,14 @@ const packageData: PackageNavigation[] = [
     link:'/'
   },
   {
-    name:'Products ',
-    link:'/tables/products'
+    name:'Categories ',
+    link:'/tables/Categories'
   },
 ];
 
 async function getAllCategory() {
 try {
-  const response = await categoryApi.getAllCategory();
+  const response = await categoryApi.getAllCategories();
   return response?.data;
 } catch (error:any) {
   // toast.error(error.message)
@@ -35,10 +35,11 @@ try {
 
 const TablesPage = async () => {
   const response = await getAllCategory()
-  const categories = response?.data?.products
+  const categories = response?.data?.categories
+  // console.log('data::::::',categories)
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Products" navigation={packageData}/>
+      <Breadcrumb pageName="Categories" navigation={packageData}/>
       <div className="flex flex-col gap-10">
         <CategoryTable listOfCategories={categories}/>
       </div>

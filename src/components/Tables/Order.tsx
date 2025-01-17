@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import Delete from "@/components/Confirmation/Delete";
 
 type Props = {
-  listOfProducts: any;
+  listOfOrders: any;
 };
 
 const OrderTable = ({ listOfOrders }: Props) => {
@@ -114,6 +114,9 @@ const OrderTable = ({ listOfOrders }: Props) => {
                       Order Date
                     </th>
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Shop name
+                    </th>
+                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Address
                     </th>
 
@@ -127,9 +130,9 @@ const OrderTable = ({ listOfOrders }: Props) => {
                       Contact
                     </th>
                     
-                    {/* <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
+                    { <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
-                    </th> */}
+                    </th> }
                   </tr>
                 </thead>
                 <tbody>

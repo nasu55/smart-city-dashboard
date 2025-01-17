@@ -158,9 +158,9 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                       Name
                     </th>
 
-                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Description
-                    </th>
+                    </th> */}
 
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
@@ -178,20 +178,20 @@ const CategoryTable = ({ listOfCategories }: Props) => {
                         </h5>
                       </td>
 
-                      <td
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === categoryData.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.categoryDescription}
                         </p>
-                      </td>
+                      </td> */}
 
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === categoryData.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
                           <Link
-                            href={`/admin/categories/edit/${packageItem._id}`}
+                            href={`/admin/category/edit/${packageItem._id}`}
                           >
                             <button className="hover:text-primary">
                               <svg

@@ -3,7 +3,7 @@ import { axiosClient } from "./config/axiosConfig";
 export const categoryApi = {  
   createCategory: async function (body: any) {
     return await axiosClient.post(
-      "categories/",
+      "categories/create",
       body,
       {
         headers: {

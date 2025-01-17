@@ -107,14 +107,13 @@ const ShopTable = ({ listOfShops }: Props) => {
                     Shop Name
                     </th>
                     <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Owner Name
+                    Owner Name
                     </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     User name
-                    </th>
-                    
+                    </th>                    
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                      Address
+                    Address
                     </th>
                     <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">

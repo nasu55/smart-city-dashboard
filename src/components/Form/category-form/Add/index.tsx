@@ -4,7 +4,7 @@ import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { any, string, z } from "zod";
 import { useRouter } from "next/navigation";
-import { brandApi } from "@/api/brandApi";
+// import { brandApi } from "@/api/brandApi";
 import { useState } from "react";
 import Link from "next/link";
 import CheckboxFive from "@/components/FormElements/Checkboxes/CheckboxFive";
@@ -27,7 +27,7 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
-import { shopApi } from "@/api/shopApi";
+import { categoryApi } from "@/api/categoryApi";
 
 const mySchema = z.object({
   categoryName: z.string().trim().min(1, { message: "Category Id is required." }),
@@ -83,15 +83,13 @@ const CategoryAddForm = () => {
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      const response = await shopApi.createshop(data);
+      const response = await categoryApi.createCategory(data);
 
       if (response.data.success == true) {
 
-        toast.success('Brand Added Successfully.')
-        router.push("/tables/brands");
+        toast.success('Category Added Successfully.')
+        router.push("/admin/category");
       }
-      toast.success('Shop Added Successfully.')
-      router.push("/shop");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -102,7 +100,7 @@ const CategoryAddForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="ADD SHOP" navigation={navigationData} />
+      <Breadcrumb pageName="ADD CATEGORY" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -138,7 +136,7 @@ const CategoryAddForm = () => {
               
                 <div>
                   <DropzoneWrapper>
-                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                     <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       Category image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>

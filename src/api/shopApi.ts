@@ -39,9 +39,10 @@ export const shopApi = {
       `shops/delete/${brandId}`,
     );
   },
-  getBrandsForshop: async function () {
-    return await axiosClient.get(
-      "brands/dropdown/brandsList",
+  shopLogin: async function (body:any) {
+    
+    return await axiosClient.post(
+      "shops/login/",body
     );
   },
 };

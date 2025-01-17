@@ -38,7 +38,7 @@ const mySchema = z.object({
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
-  shopImage: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  image: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
   .refine(
     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
     "Only .jpg, .jpeg, .png and .webp formats are supported."),
@@ -266,17 +266,17 @@ console.log(errors)
                   <DropzoneWrapper>
                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                      Shop Image
-                      {!!errors.shopImage && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.shopImage}</span>
+                      {!!errors.image && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='shopImage'
+                      name='image'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.shopImage} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
                         </div>
                       )}
                     />
