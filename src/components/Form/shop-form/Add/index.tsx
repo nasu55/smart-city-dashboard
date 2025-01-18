@@ -35,13 +35,13 @@ const mySchema = z.object({
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
-  address: z.string().trim().min(1, { message: "Address is required." }),
+  location: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   image: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-  .refine(
-    (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-    "Only .jpg, .jpeg, .png and .webp formats are supported."),
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -63,7 +63,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const ShopAddForm = () => {
+const ShopAddForm = ({ listOfLocalities }: { listOfLocalities: any }) => {
 
 
   const [internal, setInternal] = useState(false);
@@ -88,7 +88,7 @@ const ShopAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-console.log(errors)
+  console.log(errors)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
@@ -121,7 +121,7 @@ console.log(errors)
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-               
+
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -209,24 +209,29 @@ console.log(errors)
                   )}
                 </div>
 
+
+
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Address
+                    Location
                   </label>
-                  <textarea
-                    {...register("address")}
-                    rows={6}
-                    placeholder="Address"
+                  <select
+
+                    {...register("location")}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  ></textarea>
-                  {errors.address && (
+                  >
+                    <option hidden>Select--Location</option>
+                    {listOfLocalities.map((locality: any, index: number) => (
+                      <option key={index} value={locality._id}>{locality.localityName}</option>
+                    ))}
+
+                  </select>
+                  {errors.location && (
                     <p className="text-sm text-red-600">
-                      {errors.address.message}
+                      {errors.location.message}
                     </p>
                   )}
                 </div>
-
-
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Email
@@ -261,11 +266,11 @@ console.log(errors)
                   )}
                 </div>
 
-              
+
                 <div>
                   <DropzoneWrapper>
-                   <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                     Shop Image
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                      Shop Image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
                       )}
@@ -295,9 +300,9 @@ console.log(errors)
                   )}
                 </div> */}
 
-                   
 
-                   
+
+
 
                   </DropzoneWrapper>
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

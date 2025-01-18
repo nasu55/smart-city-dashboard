@@ -35,7 +35,7 @@ const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.any(),
   image: z.any(),
-  address: z.string().trim().min(1, { message: "Address is required." }),
+  location: z.string().trim().min(1, { message: "Address is required." }),
   email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.any(),
 });
@@ -62,11 +62,12 @@ const navigationData: PackageNavigation[] = [
 type Props = {
   shop: any;
   shopId: string;
+  listOfLocalities: any;
 };
 
-const ShopEditForm = ({shopId,shop}: Props) => {
-  console.log("shop id:::::",shopId);
-  console.log("shop ::::::",shop);
+const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
+  console.log("shop id:::::", shopId);
+  console.log("shop ::::::", shop);
 
 
   const [internal, setInternal] = useState(false);
@@ -90,23 +91,24 @@ const ShopEditForm = ({shopId,shop}: Props) => {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
-    defaultValues:{
-      shopName:shop.shopName,
-      ownerName:shop.ownerName,
-      userName:shop.userName,
-      email_Id:shop.email_Id,
-      address:shop.address,
-      contactNumber:shop.contactNumber,
-      image:shop.image
+  } = useForm<TMySchema>({
+    resolver: zodResolver(mySchema),
+    defaultValues: {
+      shopName: shop.shopName,
+      ownerName: shop.ownerName,
+      userName: shop.userName,
+      email_Id: shop.email_Id,
+      location: shop.location,
+      contactNumber: shop.contactNumber,
+      image: shop.image
 
     }
-   });
-   console.log(errors)
+  });
+  console.log(errors)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      const response = await shopApi.updateshop(shopId,data);
+      const response = await shopApi.updateshop(shopId, data);
 
       if (response.data.success == true) {
 
@@ -136,7 +138,7 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                
+
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Shop Name
@@ -207,22 +209,7 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                   )}
                 </div>
 
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Address
-                  </label>
-                  <textarea
-                    {...register("address")}
-                    rows={6}
-                    placeholder="Address"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  ></textarea>
-                  {errors.address && (
-                    <p className="text-sm text-red-600">
-                      {errors.address.message}
-                    </p>
-                  )}
-                </div>
+
 
 
                 <div>
@@ -259,10 +246,10 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                   )}
                 </div>
 
-              
+
                 <div>
                   <DropzoneWrapper>
-                   <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       Image
                       {!!errors.image && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
@@ -274,10 +261,32 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
                         </div>
                       )}
                     />
+                    <div>
+                      <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                        Location
+                      </label>
+                      <select
+
+                        {...register("location")}
+                        className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                      >                    <option hidden>Select--Location</option>
+
+                        {listOfLocalities?.map((location: any, index: number) => (
+                          <option key={index} value={location._id}>{location.localityName}</option>
+                        ))}
+
+
+                      </select>
+                      {errors.location && (
+                        <p className="text-sm text-red-600">
+                          {errors.location.message}
+                        </p>
+                      )}
+                    </div>
 
 
                     {/* <div>
@@ -293,9 +302,9 @@ const ShopEditForm = ({shopId,shop}: Props) => {
                   )}
                 </div> */}
 
-                   
 
-                   
+
+
 
                   </DropzoneWrapper>
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

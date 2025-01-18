@@ -19,8 +19,8 @@ const packageData: PackageNavigation[] = [
     link:'/'
   },
   {
-    name:'Shops',
-    link:'/Shop'
+    name:'Admin',
+    link:'/admin'
   },
 ];
 
@@ -40,9 +40,9 @@ const TablesPage = async () => {
 
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Shops" navigation={packageData}/>
+      <Breadcrumb pageName="Admin" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-HEllo      </div>
+Hello      </div>
     </DefaultLayout>
   );
 };

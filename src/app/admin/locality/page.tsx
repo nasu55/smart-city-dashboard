@@ -1,12 +1,10 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import BrandTable from "@/components/Tables/Brand";
-import { brandApi } from "@/api/brandApi";
-import toast from "react-hot-toast";
+import { localityApi } from "@/api/localityApi";
 import { PackageNavigation } from "@/types/packageNavigation";
-import ShopTable from "@/components/Tables/shop";
-import { shopApi } from "@/api/shopApi";
+import toast from "react-hot-toast";
+import LocalityTable from "@/components/Tables/Locality";
 
 export const metadata: Metadata = {
   title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
@@ -19,30 +17,31 @@ const packageData: PackageNavigation[] = [
     link:'/'
   },
   {
-    name:'Shop admin',
-    link:'/Shop'
+    name:'Localities ',
+    link:'/tables/Localities'
   },
 ];
 
-async function getAllShops() {
+async function getAllLocality() {
 try {
-  const response = await shopApi.getAllshop();
-  return response.data;
+  const response = await localityApi.getAllLocality();
+  return response?.data;
 } catch (error:any) {
-  // console.log(error)
   // toast.error(error.message)
-}}
+  console.log(error)
+}
+}
 
 const TablesPage = async () => {
-  const response = await getAllShops()
-
-  const shops = response.data.shops
-
+  const response = await getAllLocality()
+  const localities = response?.data.localities
+   console.log('data::::::',localities)
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Shop admin" navigation={packageData}/>
+      <Breadcrumb pageName="Categories" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-HEllo      </div>
+        <LocalityTable listOfLocalities={localities}/>
+      </div>
     </DefaultLayout>
   );
 };

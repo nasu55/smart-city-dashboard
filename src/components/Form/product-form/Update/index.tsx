@@ -110,7 +110,7 @@ const ShopEditForm = ({productId,product}: Props) => {
       if (response.data.success == true) {
 
         toast.success('Product Updated succeSSfully')
-        router.push("/admin/product");
+        router.push("/shop-admin/products");
       }
     } catch (error: any) {
       if (error.response.status == 404) {
