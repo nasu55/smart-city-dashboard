@@ -38,7 +38,7 @@ const TablesPage = async () => {
    console.log('data::::::',localities)
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Categories" navigation={packageData}/>
+      <Breadcrumb pageName="Localities" navigation={packageData}/>
       <div className="flex flex-col gap-10">
         <LocalityTable listOfLocalities={localities}/>
       </div>

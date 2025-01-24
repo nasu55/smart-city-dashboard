@@ -57,13 +57,13 @@ const ShopTable = ({ listOfShops }: Props) => {
             <div className="ml-7 flex justify-between">
               <div>
                 <form className="mx-auto max-w-md">
-                  <label
+                <label
                     htmlFor="default-search"
                     className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Search
                   </label>
-                  <div className="shop">
+                  <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
                       <svg
                         className="h-4 w-4 text-gray-500 dark:text-gray-400"
@@ -92,6 +92,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                   </div>
                 </form>
               </div>
+
               <Link
                 href={"/admin/shop/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
