@@ -42,7 +42,7 @@ const TablesPage = async () => {
     <DefaultLayout>
       <Breadcrumb pageName="Shop admin" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-HEllo      </div>
+Hello      </div>
     </DefaultLayout>
   );
 };

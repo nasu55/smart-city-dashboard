@@ -29,14 +29,14 @@ try {
   const response = await shopApi.getAllshop();
   return response.data;
 } catch (error:any) {
-  // console.log(error)
+  console.log('Error:::',error);
   // toast.error(error.message)
 }}
 
 const TablesPage = async () => {
   const response = await getAllShops()
 
-  const shops = response.data.shops
+  const shops = response?.data.shops
 
   return (
     <DefaultLayout>

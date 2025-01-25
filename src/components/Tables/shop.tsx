@@ -13,6 +13,7 @@ type Props = {
 };
 
 const ShopTable = ({ listOfShops }: Props) => {
+  console.log('data:::',listOfShops)
   // const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState();
   // const [currentPage, setCurrentPage] = useState(1);
@@ -114,7 +115,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                     User name
                     </th>                    
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
-                    Address
+                    Location
                     </th>
                     <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
@@ -123,7 +124,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {listOfShops.map((shops: any, index:number) => (
+                  {listOfShops?.map((shops: any, index:number) => (
                     <tr key={index}>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
@@ -153,7 +154,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {shops.address}
+                          {shops.location}
                         </p>
                       </td>
                       <td

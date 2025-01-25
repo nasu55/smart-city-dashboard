@@ -27,7 +27,7 @@ const packageData: PackageNavigation[] = [
 async function getAllShops() {
 try {
   const response = await shopApi.getAllshop();
-  return response.data;
+  return response?.data;
 } catch (error:any) {
   // console.log(error)
   // toast.error(error.message)

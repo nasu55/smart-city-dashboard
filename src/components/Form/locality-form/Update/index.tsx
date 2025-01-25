@@ -98,6 +98,7 @@ console.log('response',response)
 
         toast.success('Locality Added Successfully.')
         router.push("/admin/locality");
+        router.refresh()
       }
     } catch (error: any) {
       if (error.response.status == 404) {
