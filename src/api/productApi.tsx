@@ -7,6 +7,7 @@ export const productApi = {
       body,
       {
         headers: {
+          "Authorization":"bearer " + window.localStorage.getItem('accessToken'),
           "Content-Type": "multipart/form-data",
         },
       },
@@ -27,6 +28,11 @@ export const productApi = {
     
     return await axiosClient.get(
       "products/all/",
+      {
+        headers: {
+          "Authorization":"bearer " + window.localStorage.getItem('accessToken'),
+        },
+      },
     );
   },
   getProduct: async function (productId: any) {

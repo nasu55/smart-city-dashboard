@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 const mySchema = z.object({
-    userName: z.string().min(1, { message: "UserName is required." }),
+    email: z.string().min(1, { message: "UserName is required." }),
     password: z.string().min(1, { message: "Password is required." }),
 });
 
@@ -30,8 +30,8 @@ const LoginPage = () => {
         try {
             const response = await shopApi.shopLogin(data);
             if (response.data.success == true) {
-                // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
-                // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
+                window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
+                Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
                 router.push("/shop-admin");
 
@@ -63,7 +63,7 @@ const LoginPage = () => {
 
                                 <div className="mb-5.5">
                                     <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                                        Usename
+                                        Email
                                     </label>
                                     <div className="relative">
                                         <span className="absolute left-4.5 top-1/2 -translate-y-1/2">
@@ -90,14 +90,14 @@ const LoginPage = () => {
                                             </svg>
                                         </span>
                                         <input
-                                            {...register("userName")}
+                                            {...register("email")}
                                             className="w-full rounded-[7px] border-[1.5px] border-stroke bg-white py-2.5 pl-12.5 pr-4.5 text-dark focus:border-primary focus-visible:outline-none dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                                             type="text"
                                             placeholder="Username"
                                         />
-                                        {errors.userName && (
+                                        {errors.email && (
                                             <p className="text-sm text-red-600">
-                                                {errors.userName.message}
+                                                {errors.email.message}
                                             </p>
                                         )}
                                     </div>
