@@ -38,6 +38,8 @@ type Props = {
 };
 
 const BannerTable = ({ listOfBanners }: Props) => {
+
+  console.log("list:::::::::::::",listOfBanners)
   let [itemId, setItemId] = useState()
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -96,7 +98,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
         <div className="flex justify-between">
           <p className="ml-7 text-lg font-semibold">Items</p>
           <Link
-            href={"/tables/banners/add"}
+            href={"/shop-admin/banners/add"}
             className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
             >
             Add Banner
@@ -106,20 +108,25 @@ const BannerTable = ({ listOfBanners }: Props) => {
           <table className="w-full ">
             <thead>
               <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
+
                 <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
                   Image
                 </th>
+
                 <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                  Category
+                  Product
                 </th>
-                <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
+
+                {/* <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white">
+                </th> */}
+
                 <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody>
-              {bannerData.map((packageItem: any, index) => (
+              {listOfBanners.map((packageItem: any, index) => (
                 <tr key={index}>
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
@@ -144,18 +151,18 @@ const BannerTable = ({ listOfBanners }: Props) => {
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                     >
                     <p className="text-dark dark:text-white">
-                      {packageItem.category.name}
+                      {packageItem.product}
                     </p>
                   </td>
-                  <td
-                    className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                  {/* <td
+                    className={border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}}
                     >
-                  </td>
+                  </td> */}
                   <td
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                   >
                     <div className="flex items-center justify-end space-x-3.5">
-                      <Link href={`/tables/banners/edit/${packageItem._id}`}>
+                      <Link href={`/admin/banners/edit/${packageItem._id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="20"

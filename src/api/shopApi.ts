@@ -23,15 +23,20 @@ export const shopApi = {
       },
     );
   },
+  featuredShop: async function (shopId: any) {
+    return await axiosClient.put(
+      `shops/featured/${shopId}`
+    );
+  },
   getAllshop: async function () {
     
     return await axiosClient.get(
       "shops/all/",
     );
   },
-  getshop: async function (brandId: any) {
+  getshop: async function (shopId: any) {
     return await axiosClient.get(
-      `shops/view/${brandId}`,
+      `shops/view/${shopId}`,
     );
   },
   deleteshop: async function (brandId: any) {

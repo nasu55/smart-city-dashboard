@@ -3,7 +3,7 @@ import { axiosClient } from "./config/axiosConfig";
 export const bannerApi = {
   createBanner: async function (body: any) {
     return await axiosClient.post(
-      "banners/",
+      "banners/create",
       body,
       {
         headers: {
@@ -25,12 +25,12 @@ export const bannerApi = {
   },
   getAllBanners: async function () {
     return await axiosClient.get(
-      "banners/getAll",
+      "banners/all",
     );
   },
   getBanner: async function (bannerId: any) {
     return await axiosClient.get(
-      `banners/getBrand/${bannerId}`,
+      `banners/view/${bannerId}`,
     );
   },
   deleteBanner: async function (bannerId: any) {
