@@ -5,7 +5,7 @@ import ShopEditForm from "@/components/Form/shop-form/Update";
 import toast from "react-hot-toast";
 import { shopApi } from "@/api/shopApi";
 import { localityApi } from "@/api/localityApi";
-
+import { categoryApi } from "@/api/categoryApi";
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements Page | NextAdmin - Next.js Dashboard Kit",
@@ -13,13 +13,12 @@ export const metadata: Metadata = {
 };
 
 async function getShop(id: string) {
-try {
-  const response = await shopApi.getshop(id);
-  return response.data;
-} catch (error: any) {
-  toast.error(error.message);
-  console.log(error);
-}
+  try {
+    const response = await shopApi.getshop(id);
+    return response.data;
+  } catch (error: any) {
+    console.log(error);
+  }
 }
 
 async function getAllLocality() {
@@ -27,23 +26,37 @@ async function getAllLocality() {
     const response = await localityApi.getAllLocality();
     return response.data;
   } catch (error: any) {
-    toast.error(error.message);
     console.log(error);
   }
-  }
+}
 
-const FormElementsPage = async ({params}:{params:{id:string}}) => {
+async function getAllcategory() {
+  try {
+    const response = await categoryApi.getAllCategories();
+    return response?.data;
+  } catch (error: any) {
+    // toast.error(error.message)
+    console.log(error);
+  }
+}
+
+const FormElementsPage = async ({ params }: { params: { id: string } }) => {
   const response = await getShop(params.id);
   const shop = response.data.shop;
   const response1 = await getAllLocality();
   const localities = response1.data.localities;
+  const responseCategory = await getAllcategory()
+  const Categories = responseCategory?.data.categories
   return (
     <DefaultLayout>
-  
-      <ShopEditForm shop={shop} shopId={params.id} listOfLocalities={localities}/>
+      <ShopEditForm
+        shop={shop}
+        shopId={params.id}
+        listOfLocalities={localities}
+        listOfCategories={Categories}
+      />
     </DefaultLayout>
   );
 };
-
 
 export default FormElementsPage;

@@ -98,7 +98,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
         <div className="flex justify-between">
           <p className="ml-7 text-lg font-semibold">Items</p>
           <Link
-            href={"/shop-admin/banners/add"}
+            href={"/admin/banners/add"}
             className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
             >
             Add Banner
@@ -244,7 +244,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
         </div></>:<div className="flex flex-col justify-center w-full items-center">
         <p className="text-red-600 text-lg">Data not found</p>
         <Link
-            href={"/tables/banners/add"}
+            href={"/admin/banners/add"}
             className="mt-3 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
             >
             Add Banner

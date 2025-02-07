@@ -36,7 +36,7 @@ const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "user Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
   location: z.string().trim().min(1, { message: "Address is required." }),
-  category: z.string().trim().min(1, { message: "Address is required." }),
+  category: z.string().trim().min(1, { message: "Category is required." }),
   email: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   image: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
@@ -65,7 +65,6 @@ const navigationData: PackageNavigation[] = [
 ];
 
 const ShopAddForm = ({ listOfLocalities,listCategories }: { listOfLocalities: any,listCategories:any }) => {
-console.log('cattttttt',listCategories)
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -93,6 +92,7 @@ console.log('cattttttt',listCategories)
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
+      console.log('data::::',data)
       const response = await shopApi.createshop(data);
       if (response.data.success == true) {
 
@@ -242,7 +242,7 @@ console.log('cattttttt',listCategories)
                     {...register("category")}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   >
-                    <option hidden>Select--Location</option>
+                    <option hidden>Select--Category</option>
                     {listCategories.map((category: any, index: number) => (
                       <option key={index} value={category._id}>{category.categoryName}</option>
                     ))}

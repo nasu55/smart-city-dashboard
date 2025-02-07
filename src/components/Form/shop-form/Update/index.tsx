@@ -32,30 +32,33 @@ import { shopApi } from "@/api/shopApi";
 const mySchema = z.object({
   shopName: z.string().trim().min(1, { message: "Shop Name is required." }),
   ownerName: z.string().trim().min(1, { message: "Owner Name is required." }),
-  userName: z.string().trim().min(1, { message: "user Name is required." }),
-  password: z.any(),
   image: z.any(),
   location: z.string().trim().min(1, { message: "Address is required." }),
+  category: z.string().trim().min(1, { message: "Address is required." }),
   email_Id: z.string().trim().min(1, { message: "Email Id is required." }),
   contactNumber: z.any(),
 });
 const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 type TMySchema = z.infer<typeof mySchema>;
-
 
 const navigationData: PackageNavigation[] = [
   {
-    name: 'Dashboard / ',
-    link: '/'
+    name: "Dashboard / ",
+    link: "/",
   },
   {
-    name: 'Shops / ',
-    link: '/Shop'
+    name: "Shops / ",
+    link: "/Shop",
   },
   {
-    name: 'Add ',
-    link: ''
+    name: "Add ",
+    link: "",
   },
 ];
 
@@ -63,12 +66,17 @@ type Props = {
   shop: any;
   shopId: string;
   listOfLocalities: any;
+  listOfCategories: any;
 };
 
-const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
+const ShopEditForm = ({
+  shopId,
+  shop,
+  listOfLocalities,
+  listOfCategories,
+}: Props) => {
   console.log("shop id:::::", shopId);
   console.log("shop ::::::", shop);
-
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -96,38 +104,32 @@ const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
     defaultValues: {
       shopName: shop.shopName,
       ownerName: shop.ownerName,
-      userName: shop.userName,
       email_Id: shop.email_Id,
-      location: shop.location,
       contactNumber: shop.contactNumber,
-      image: shop.image
-
-    }
+      image: shop.image,
+    },
   });
-  console.log(errors)
+  console.log(errors);
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
       const response = await shopApi.updateshop(shopId, data);
 
       if (response.data.success == true) {
-
-        toast.success('Shop Updated succefffully')
+        toast.success("Shop Updated succefffully");
         router.push("/admin/shop");
       }
     } catch (error: any) {
       if (error.response.status == 404) {
-        toast.error(error.message)
+        toast.error(error.message);
       }
     }
   };
 
   return (
     <>
-
       <Breadcrumb pageName="ADD SHOP" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
-
         <form onSubmit={handleSubmit(submitData)}>
           <div className="flex flex-col gap-9">
             {/* <!-- Input Fields --> */}
@@ -138,7 +140,6 @@ const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Shop Name
@@ -172,45 +173,48 @@ const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
                     </p>
                   )}
                 </div>
-
-
-
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    User Name
+                    Location
                   </label>
-                  <input
-                    {...register("userName")}
-                    type="text"
-                    placeholder="User Name"
+                  <select
+                    {...register("location")}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.userName && (
+                  >
+                    <option hidden value={shop.locations._id}>{shop.locations.localityName}</option>
+                    {listOfLocalities.map((locality: any, index: number) => (
+                      <option key={index} value={locality._id}>
+                        {locality.localityName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.location && (
                     <p className="text-sm text-red-600">
-                      {errors.userName.message}
+                      {errors.location.message}
                     </p>
                   )}
                 </div>
-
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Password
+                    Category
                   </label>
-                  <input
-                    {...register("password")}
-                    type="text"
-                    placeholder="Password"
+                  <select
+                    {...register("category")}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.password && (
+                  >
+                    <option hidden value={shop.categories._id}>{shop.categories.categoryName}</option>
+                    {listOfCategories.map((category: any, index: number) => (
+                      <option key={index} value={category._id}>
+                        {category.categoryName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.category && (
                     <p className="text-sm text-red-600">
-                      {/* {errors.password.message} */}
+                      {errors.category.message}
                     </p>
                   )}
                 </div>
-
-
-
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -246,48 +250,42 @@ const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
                   )}
                 </div>
 
-
                 <div>
                   <DropzoneWrapper>
-                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    <Typography
+                      fontWeight={500}
+                      color="textPrimary"
+                      sx={{ mb: 2.5 }}
+                    >
                       Image
                       {!!errors.image && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.image}</span>
+                        <span
+                          style={{
+                            color: "red",
+                            fontSize: "14px",
+                            position: "absolute",
+                            right: "65px",
+                          }}
+                        >
+                          Invalid Image format {!!errors.image}
+                        </span>
                       )}
                     </Typography>
                     <Controller
-                      name='image'
+                      name="image"
                       control={control}
-                      defaultValue=''
+                      defaultValue=""
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.image} />
+                          <FileUploaderSingle
+                            file={field.value}
+                            setFile={field.onChange}
+                            error={errors.image}
+                          />
                         </div>
                       )}
                     />
-                    <div>
-                      <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                        Location
-                      </label>
-                      <select
-
-                        {...register("location")}
-                        className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                      >                    <option hidden>Select--Location</option>
-
-                        {listOfLocalities?.map((location: any, index: number) => (
-                          <option key={index} value={location._id}>{location.localityName}</option>
-                        ))}
-
-
-                      </select>
-                      {errors.location && (
-                        <p className="text-sm text-red-600">
-                          {errors.location.message}
-                        </p>
-                      )}
-                    </div>
-
+                  
 
                     {/* <div>
                   <SelectDropdown
@@ -301,11 +299,6 @@ const ShopEditForm = ({ shopId, shop, listOfLocalities }: Props) => {
                     </p>
                   )}
                 </div> */}
-
-
-
-
-
                   </DropzoneWrapper>
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Brand Logo
