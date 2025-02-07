@@ -17,7 +17,7 @@ import { PackageNavigation } from "@/types/packageNavigation";
 const mySchema = z.object({
   shop: z.string().nonempty({ message: "Please select a Food" }),
   category: z.string().nonempty({ message: "Please select a category" }),
-  bannerImage: z
+  image: z
     .any()
     .refine((file) => file?.size <= MAX_FILE_SIZE, "Max image size is 5MB.")
     .refine(
@@ -42,7 +42,7 @@ const packageData: PackageNavigation[] = [
   },
   {
     name: "Banners / ",
-    link: "/shop-admin/banners",
+    link: "/admin/banners/add",
   },
   {
     name: "Add ",
@@ -73,7 +73,7 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
 
       if (response.data.success == true) {
         toast.success("Banner Added Successfully.");
-        router.push("/shop-admin/banners");
+        router.push("/admin/banners/");
       }
     } catch (error: any) {
       // if (error.response.status == 404) {
@@ -154,7 +154,7 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
                       sx={{ mb: 2.5 }}
                     >
                       Banner Image
-                      {!!errors.bannerImage && (
+                      {!!errors.image && (
                         <span
                           style={{
                             color: "red",
@@ -163,12 +163,12 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
                             right: "65px",
                           }}
                         >
-                          Invalid Image format {!!errors.bannerImage}
+                          Invalid Image format {!!errors.image}
                         </span>
                       )}
                     </Typography>
                     <Controller
-                      name="bannerImage"
+                      name="image"
                       control={control}
                       defaultValue=""
                       render={({ field }) => (
@@ -176,7 +176,7 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
                           <FileUploaderSingle
                             file={field.value}
                             setFile={field.onChange}
-                            error={errors.bannerImage}
+                            error={errors.image}
                           />
                         </div>
                       )}

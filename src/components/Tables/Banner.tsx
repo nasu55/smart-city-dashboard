@@ -114,7 +114,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
                 </th>
 
                 <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                  Product
+                  Shop
                 </th>
 
                 {/* <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white">
@@ -134,7 +134,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
                     <h5 className="text-dark dark:text-white">
                       <div className="relative h-15 w-30">
                         <Image
-                          src={storageUrl + packageItem.bannerImage}
+                          src={storageUrl + packageItem.image}
                           alt="Banner Image"
                           // width={150}
                           // height={200}
@@ -151,7 +151,7 @@ const BannerTable = ({ listOfBanners }: Props) => {
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                     >
                     <p className="text-dark dark:text-white">
-                      {packageItem.product}
+                      {packageItem.shop}
                     </p>
                   </td>
                   {/* <td

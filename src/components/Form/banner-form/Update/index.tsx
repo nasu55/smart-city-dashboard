@@ -17,7 +17,7 @@ import { PackageNavigation } from "@/types/packageNavigation";
 const mySchema = z.object({
   food: z.string().nonempty({ message: "Please select a Food" }),
   category: z.string().nonempty({ message: "Please select a category" }),
-  bannerImage: z
+  image: z
     .any()
    ,
 });
@@ -38,7 +38,7 @@ const packageData: PackageNavigation[] = [
   },
   {
     name: "Banners / ",
-    link: "/admin/banners",
+    link: "/admin/banners/",
   },
   {
     name: "Add ",
