@@ -83,13 +83,15 @@ const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
   };
 
   const [matchingShop, setMatchingShop] = React.useState<any[]>([]);
+  
+  // setMatchingShop(banners.shop)
 
   const handleCategoryChange = (e: any) => {
     console.log(e.target.value);
     const selectedValue = e.target.value;
     console.log("selectedValue")
     const matchedShop = shopList.filter(
-      (shopitem: any) => shopitem.shopName === selectedValue,
+      (shopitem: any) => shopitem.categories._id === selectedValue,
     );
     setMatchingShop(matchedShop);
   };
@@ -144,16 +146,12 @@ const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
                     {" "}
                     <option hidden value={banners.shops._id}>{banners.shops.shopName}</option>
 
-                    {shopList?.map((shopList: any, index: number) => (
+                    {matchingShop?.map((shopList: any, index: number) => (
                       <option key={index} value={shopList._id}>
                         {shopList.shopName}
                       </option>
                     ))}
-                    {/* <option value="">Select category</option>
-    <option value="category1">Category 1</option>
-    <option value="category2">Category 2</option>
-    <option value="category3">Category 3</option> */}
-                    {/* <!-- Add more options as needed --> */}
+                    
                   </select>
                   {errors.shop && (
                     <p className="text-sm text-red-600">

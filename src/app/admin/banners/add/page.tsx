@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     const response = await shopApi.getAllshop();
     return response.data;
   } catch (error:any) {
-    // console.log(error)
+    console.log(error)
     // toast.error(error.message)
   }}
 
@@ -36,7 +36,7 @@ const FormElementsPage = async () => {
   const categories = response?.data?.categories
 
   const response1 = await getAllProduct()
-  const shops = response1.data.shops
+  const shops = response1?.data.shops
   return (
     <DefaultLayout>
       <BannerAddForm categoryList={categories} shops={shops}/>

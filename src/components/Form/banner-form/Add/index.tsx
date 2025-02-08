@@ -57,7 +57,7 @@ type Props = {
 
 const BannerAddForm = ({ categoryList, shops }: Props) => {
   const router = useRouter();
-
+console.log('shops::',shops)
   const {
     register,
     control,
@@ -82,15 +82,14 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
     }
   };
 
-  const [matchingFood, setMatchingFood] = React.useState<any[]>([]);
+  const [matchingShops, setMatchingShops] = React.useState<any[]>([]);
 
   const handleCategoryChange = (e: any) => {
-    console.log(e.target.value);
     const selectedValue = e.target.value;
-    const matchedFood = shops.filter(
-      (shop: any) => shop.category === selectedValue,
+    const matchedShop = shops.filter(
+      (shop: any) => shop.categories._id === selectedValue,
     );
-    setMatchingFood(matchedFood);
+    setMatchingShops(matchedShop);
   };
 
   return (
@@ -130,11 +129,10 @@ const BannerAddForm = ({ categoryList, shops }: Props) => {
                   </label>
                   <select
                     {...register("shop")}
-                    onChange={handleCategoryChange}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   >
                     <option hidden>Select--shop</option>
-                    {shops?.map((shop: any, index: number) => (
+                    {matchingShops?.map((shop: any, index: number) => (
                       <option key={index} value={shop._id}>
                         {shop.shopName}
                       </option>

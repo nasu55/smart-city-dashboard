@@ -57,7 +57,7 @@ const navigationData: PackageNavigation[] = [
     link: "/Shop",
   },
   {
-    name: "Add ",
+    name: "Edit ",
     link: "",
   },
 ];
@@ -128,7 +128,7 @@ const ShopEditForm = ({
 
   return (
     <>
-      <Breadcrumb pageName="ADD SHOP" navigation={navigationData} />
+      <Breadcrumb pageName="EDIT SHOP" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
         <form onSubmit={handleSubmit(submitData)}>
           <div className="flex flex-col gap-9">
@@ -136,7 +136,7 @@ const ShopEditForm = ({
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Shop
+                  Edit Shop
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
