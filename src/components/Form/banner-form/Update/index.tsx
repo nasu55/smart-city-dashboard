@@ -4,7 +4,7 @@ import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { any, string, z } from "zod";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 import { toast } from "react-hot-toast";
 import { serialize } from "object-to-formdata";
@@ -51,6 +51,8 @@ type Props = {
 };
 
 const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
+
+  
   const router = useRouter();
   console.log(banners);
   const {
@@ -62,35 +64,45 @@ const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
     resolver: zodResolver(mySchema),
     defaultValues: {
       image: banners.image,
+      category:banners.category,
+      shop:banners.shop
     },
   });
-
+  
   const submitData = async (data: any) => {
     try {
       // console.log('data::', data)
       // const formData = serialize(data)  //If there is image in the form
       const response = await bannerApi.updateBanner(bannerId, data);
-
+      
       if (response.data.success == true) {
         toast.success("Banner Added Successfully.");
         router.push("/admin/banners");
       }
     } catch (error: any) {
       // if (error.response.status == 404) {
-      //   toast.error(error.message);
-      // }
-    }
-  };
-
-  const [matchingShop, setMatchingShop] = React.useState<any[]>([]);
+        //   toast.error(error.message);
+        // }
+      }
+    };
+    let matchedShop
+    const [matchingShop, setMatchingShop] = React.useState<any[]>([]);
+    useEffect(() => {
+      if (banners.category) {
+        matchedShop = shopList.filter(
+          (shopitem: any) => shopitem.categories._id === banners.category,
+        );
+        setMatchingShop(matchedShop);
+      }
+    }, []);
   
-  // setMatchingShop(banners.shop)
+  // setMatchingShop()
 
   const handleCategoryChange = (e: any) => {
     console.log(e.target.value);
     const selectedValue = e.target.value;
     console.log("selectedValue")
-    const matchedShop = shopList.filter(
+     matchedShop = shopList.filter(
       (shopitem: any) => shopitem.categories._id === selectedValue,
     );
     setMatchingShop(matchedShop);
@@ -120,7 +132,7 @@ const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
                     onChange={handleCategoryChange}
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   >
-                    <option hidden value={banners.categories._id}>{banners.categories.categoryName}</option>
+                    {/* <option hidden value={banners.categories._id}>{banners.categories.categoryName}</option> */}
                     {categoryList?.map((category: any, index: number) => (
                       <option key={index} value={category._id}>
                         {category.categoryName}
@@ -144,7 +156,7 @@ const BannerEditForm = ({ bannerId, banners, categoryList, shopList }: any) => {
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   >
                     {" "}
-                    <option hidden value={banners.shops._id}>{banners.shops.shopName}</option>
+                    {/* <option hidden value={banners.shops._id}>{banners.shops.shopName}</option> */}
 
                     {matchingShop?.map((shopList: any, index: number) => (
                       <option key={index} value={shopList._id}>
