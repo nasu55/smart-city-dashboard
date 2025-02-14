@@ -64,7 +64,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const ShopAddForm = ({ listOfLocalities,listCategories }: { listOfLocalities: any,listCategories:any }) => {
+const ShopRegisterForm = ({ listOfLocalities,listCategories }: { listOfLocalities: any,listCategories:any }) => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -92,10 +92,8 @@ const ShopAddForm = ({ listOfLocalities,listCategories }: { listOfLocalities: an
   const submitData = async (data: any) => {
     try {
       // const formData = serialize(data)
-      const updatedData = { ...data, status: "isApproved" };
-      
       console.log('data::::',data)
-      const response = await shopApi.createshop(updatedData);
+      const response = await shopApi.createshop(data);
       if (response.data.success == true) {
 
         toast.success('Shop Added Successfully.')
@@ -356,4 +354,4 @@ const ShopAddForm = ({ listOfLocalities,listCategories }: { listOfLocalities: an
   );
 };
 
-export default ShopAddForm;
+export default ShopRegisterForm;

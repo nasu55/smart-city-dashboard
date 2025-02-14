@@ -78,6 +78,12 @@ const ShopTable = ({ listOfShops }: Props) => {
           >
             Add Shop
           </Link>
+          <Link
+            href={"/admin/shop/registered-shops"}
+            className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
+          >
+            Registered Shops
+          </Link>
         </div>
         <div className="max-w-full overflow-x-auto">
           <table className="w-full ">

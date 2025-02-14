@@ -3,6 +3,7 @@ import { adminApi } from "@/api/authApi";
 import { shopApi } from "@/api/shopApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { serialize } from "object-to-formdata";
 import React from "react";
@@ -146,6 +147,11 @@ const LoginPage = () => {
                                     >
                                         Login
                                     </button>
+                                    <Link href={"/shop-register"}
+                                        className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
+                                    >
+                                        Register
+                                    </Link>
                                 </div>
                             </form>
                         </div>

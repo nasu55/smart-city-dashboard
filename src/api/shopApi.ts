@@ -34,6 +34,12 @@ export const shopApi = {
       "shops/all/",
     );
   },
+  getRegisteredshop: async function () {
+    
+    return await axiosClient.get(
+      "shops/registered/",
+    );
+  },
   getshop: async function (shopId: any) {
     return await axiosClient.get(
       `shops/view/${shopId}`,
@@ -42,6 +48,16 @@ export const shopApi = {
   deleteshop: async function (brandId: any) {
     return await axiosClient.delete(
       `shops/delete/${brandId}`,
+    );
+  },
+  approveshop: async function (brandId: any) {
+    return await axiosClient.delete(
+      `shops/approve/${brandId}`,
+    );
+  },
+  rejectshop: async function (brandId: any) {
+    return await axiosClient.delete(
+      `shops/reject/${brandId}`,
     );
   },
   shopLogin: async function (body:any) {
