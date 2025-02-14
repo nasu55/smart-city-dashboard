@@ -34,6 +34,12 @@ export const shopApi = {
       "shops/all/",
     );
   },
+  getAllUsers: async function () {
+    
+    return await axiosClient.get(
+      "user",
+    );
+  },
   getRegisteredshop: async function () {
     
     return await axiosClient.get(

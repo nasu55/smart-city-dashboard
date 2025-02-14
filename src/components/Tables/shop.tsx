@@ -71,7 +71,6 @@ const ShopTable = ({ listOfShops }: Props) => {
           <div>
             <form className="mx-auto max-w-md"></form>
           </div>
-
           <Link
             href={"/admin/shop/add"}
             className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
