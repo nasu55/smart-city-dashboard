@@ -120,7 +120,7 @@ const RegisteredShopsTable = ({ listOfShops }: Props) => {
                   Approve
                 </th>
                 <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
-                  Actions
+                  Reject
                 </th>
               </tr>
             </thead>
