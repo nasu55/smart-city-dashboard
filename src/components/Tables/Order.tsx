@@ -129,6 +129,9 @@ const OrderTable = ({ listOfOrders }: Props) => {
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Contact
                     </th>
+                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                      Status
+                    </th>
                     
                     { <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
@@ -247,7 +250,7 @@ const OrderTable = ({ listOfOrders }: Props) => {
                             </button>
                           </Link>
                           <Link
-                            href={`/shop-admin/products/edit/${orders._id}`}
+                            href={`/shop-admin/orders/edit/${orders._id}`}
                           >
                             <button className="hover:text-primary">
                               <svg
