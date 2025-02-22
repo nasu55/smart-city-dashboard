@@ -1,4 +1,5 @@
 // pages/order.js
+"use client"
 import { Box, Container, Grid, Paper, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React from 'react';
 

@@ -113,12 +113,12 @@ const OrderTable = ({ listOfOrders }: Props) => {
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Order Date
                     </th>
-                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Shop name
-                    </th>
-                    <th className=" px-4 py-4 font-medium text-dark dark:text-white">
+                    </th> */}
+                    {/* <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                       Address
-                    </th>
+                    </th> */}
 
                     <th className=" px-4 py-4 font-medium text-dark dark:text-white">
                      Total Amount
@@ -249,7 +249,7 @@ const OrderTable = ({ listOfOrders }: Props) => {
                               </svg>
                             </button>
                           </Link>
-                          <Link
+                          {/* <Link
                             href={`/shop-admin/orders/edit/${orders._id}`}
                           >
                             <button className="hover:text-primary">
@@ -272,11 +272,11 @@ const OrderTable = ({ listOfOrders }: Props) => {
                                 </g>
                               </svg>
                             </button>
-                          </Link>
-                          <button
+                          </Link> */}
+                          {/* <button
                             className="hover:text-primary"
                             onClick={() => setItemId(orders._id)}
-                          >
+                          > */}
                             {/* {itemId === orders._id && (
                               <Delete
                                 deleteId={deleteProduct}
@@ -286,7 +286,7 @@ const OrderTable = ({ listOfOrders }: Props) => {
                               />
                             )} */}
 
-                            <svg
+                            {/* <svg
                               className="fill-current"
                               width="20"
                               height="20"
@@ -313,7 +313,7 @@ const OrderTable = ({ listOfOrders }: Props) => {
                                 fill=""
                               />
                             </svg>
-                          </button>
+                          </button> */}
                           {/* <button className="hover:text-primary">
                       <svg
                         className="fill-current"
