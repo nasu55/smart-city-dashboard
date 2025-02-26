@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
+import MainPage from "@/components/LoginPage";
 
 export const metadata: Metadata = {
   title:
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <DefaultLayout>
-        hello
-      </DefaultLayout>
+    <MainPage/>
+
+
     </>
   );
 }

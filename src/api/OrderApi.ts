@@ -1,9 +1,9 @@
 import { axiosClient } from "./config/axiosConfig";
 
-export const localityApi = {  
+export const orderApi = {  
 
 
-  getAllLocality: async function () {
+  getAllOrders: async function () {
     return await axiosClient.get(
       "order",
     );

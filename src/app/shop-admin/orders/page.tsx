@@ -1,49 +1,43 @@
+'use client'
+
+import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import ProductTable from "@/components/Tables/Product";
-import { productApi } from "@/api/productApi";
-import { PackageNavigation } from "@/types/packageNavigation";
-import toast from "react-hot-toast";
 import OrderTable from "@/components/Tables/Order";
+import { orderApi } from "@/api/OrderApi";
+import toast from "react-hot-toast";
 
-export const metadata: Metadata = {
-  title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
-  description: "This is Next.js Tables page for NextAdmin Dashboard Kit",
-};
-
-const packageData: PackageNavigation[] = [
-  {
-    name:'Dashboard / ',
-    link:'/'
-  },
-  {
-    name:'Orders ',
-    link:'/shop-admin/orders'
-  },
+const packageData = [
+  { name: 'Dashboard / ', link: '/' },
+  { name: 'Orders ', link: '/shop-admin/orders' },
 ];
 
-// async function getAllProducts() {
-// try {
-//   const response = await productApi.getAllProduct();
-//   return response.data;
-// } catch (error:any) {
-//   // toast.error(error.message)
-//   console.log(error)
-// }
-// }
+const TablesPage = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const orders =[{
-    hello:'g'
-}]
-const TablesPage = async () => {
-//   const response = await getAllProducts()
-//   const products = response?.data.products
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await orderApi.getAllOrders();
+        console.log('yguyguguyguyuygyu',response.data)
+        setOrders(response.data.data);
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to fetch orders.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Orders" navigation={packageData}/>
+      <Breadcrumb pageName="Orders" navigation={packageData} />
       <div className="flex flex-col gap-10">
-        <OrderTable listOfOrders={orders}/>
+        {loading ? <p>Loading orders...</p> : <OrderTable listOfOrders={orders} />}
       </div>
     </DefaultLayout>
   );
