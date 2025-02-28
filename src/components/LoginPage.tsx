@@ -25,7 +25,7 @@ const MainPage = () => {
 
   return (
     <>
-      <div className="flex h-[100vh] w-full items-center justify-center">
+      <div className="flex h-[100vh] w-full items-center justify-center bg-gradient-to-r from-zinc-600 to-indigo-600">
         <div className="h-[50%] w-[30%]">
           <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
             <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
