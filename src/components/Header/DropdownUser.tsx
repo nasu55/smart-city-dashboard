@@ -16,6 +16,9 @@ const DropdownUser = () => {
     pathname.startsWith('/admin') ? router.push('/admin-login') : pathname.startsWith('/shop-admin') ? router.push('/shop-login') : router.push('/')
   }
 
+  const name = window.localStorage.getItem('userData.name')
+  // const owner = window.localStorage.getItem('userData.owner')
+
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -25,7 +28,7 @@ const DropdownUser = () => {
       >
         
         <span className="flex items-center gap-2 font-medium text-dark dark:text-dark-6">
-          <span className="hidden lg:block">Logout</span>
+          <span className="hidden lg:block">{name}</span>
 
           <svg
             className={`fill-current duration-200 ease-in ${dropdownOpen && "rotate-180"}`}
