@@ -9,8 +9,8 @@ import ShopTable from "@/components/Tables/shop";
 import { shopApi } from "@/api/shopApi";
 
 export const metadata: Metadata = {
-  title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
-  description: "This is Next.js Tables page for NextAdmin Dashboard Kit",
+  title: "Shop-admin",
+  description: "This is  page for ShopAdmin",
 };
 
 const packageData: PackageNavigation[] = [
