@@ -8,8 +8,6 @@ type Props = {
 };
 
 const UsersTable = ({ listOfUsers: listOfUsers }: Props) => {
-  console.log("usersss", listOfUsers);
-
   const router = useRouter();
 
   return (
@@ -66,7 +64,6 @@ const UsersTable = ({ listOfUsers: listOfUsers }: Props) => {
             </table>
           </div>
         </>
-        )
       </div>
     </>
   );

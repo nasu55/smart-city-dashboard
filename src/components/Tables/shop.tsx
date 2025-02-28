@@ -95,7 +95,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                   Owner Name
                 </th>
                 <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                  User name
+                  Email
                 </th>
                 <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white xl:pl-7.5">
                   Location
@@ -132,7 +132,7 @@ const ShopTable = ({ listOfShops }: Props) => {
                     className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === shops.length - 1 ? "border-b-0" : "border-b"}`}
                   >
                     <p className="text-dark dark:text-white">
-                      {shops.userName}
+                      {shops.email_Id}
                     </p>
                   </td>
                   <td

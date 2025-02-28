@@ -74,6 +74,7 @@ console.log('shops::',shops)
       if (response.data.success == true) {
         toast.success("Banner Added Successfully.");
         router.push("/admin/banners/");
+        
       }
     } catch (error: any) {
       // if (error.response.status == 404) {
