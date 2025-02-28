@@ -146,12 +146,10 @@ const OrderTable = ({ listOfOrders }: Props) => {
                     <td
                       className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
                     >
-                      {/* {orders.products.map((item, index) => { */}
                         <h5 key={index} className="text-dark dark:text-white">
                         {orders.products.map((product) => product.productName).join(", ")}
 
                         </h5>
-                      {/* })} */}
                     </td>
                   </tr>
                 ))}
