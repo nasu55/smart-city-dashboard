@@ -270,7 +270,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <Image
               width={176}
               height={32}
-              src={storageUrl +  image}
+              src={smartlogo}
               alt="Logo"
               priority
               className=""

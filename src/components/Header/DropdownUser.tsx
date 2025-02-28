@@ -12,7 +12,7 @@ const DropdownUser = () => {
   const router = useRouter();
 
   function LogOut() {
-
+ window.localStorage.clear()
     pathname.startsWith('/admin') ? router.push('/admin-login') : pathname.startsWith('/shop-admin') ? router.push('/shop-login') : router.push('/')
   }
 
@@ -28,7 +28,8 @@ const DropdownUser = () => {
       >
         
         <span className="flex items-center gap-2 font-medium text-dark dark:text-dark-6">
-          <span className="hidden lg:block">{name}</span>
+          {/* {name ? <span className="hidden lg:block">{name}</span> : <span className="hidden lg:block">Admin</span>} */}
+          <span className="hidden lg:block">{name || 'Admin'}</span>
 
           <svg
             className={`fill-current duration-200 ease-in ${dropdownOpen && "rotate-180"}`}
