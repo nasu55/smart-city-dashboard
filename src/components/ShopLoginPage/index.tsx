@@ -32,8 +32,11 @@ const LoginPage = () => {
         try {
             const response = await shopApi.shopLogin(data);
             if (response.data.success == true) {
+                console.log('resssssssssss',response);
                 window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
                 Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
+                window.localStorage.setItem('userData.name',response.data.userData.name)
+                window.localStorage.setItem('userData.image',response.data.userData.image)
 
                 router.push("/shop-admin");
 

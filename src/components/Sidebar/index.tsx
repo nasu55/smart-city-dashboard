@@ -8,6 +8,7 @@ import SidebarItem from "@/components/Sidebar/SidebarItem";
 import ClickOutside from "@/components/ClickOutside";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import smartlogo from "../../../public/images/Smartcitylogo.png"
+import { storageUrl } from "@/utils/baseUrl";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -397,6 +398,9 @@ const shopGroup = [
   },
 ];
 
+const image = window.localStorage.getItem('userData.image')
+console.log("🚀 ~ image::::::::::::::;;:", image)
+
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
 
@@ -418,7 +422,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <Image
               width={176}
               height={32}
-              src={smartlogo}
+              src={storageUrl +  image}
               alt="Logo"
               priority
               className=""
