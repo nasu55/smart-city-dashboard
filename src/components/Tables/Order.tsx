@@ -126,7 +126,7 @@ const OrderTable = ({ listOfOrders }: Props) => {
                       className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === orders.length - 1 ? "border-b-0" : "border-b"}`}
                     >
                       <h5 className="text-dark dark:text-white">
-                        {orders.userDetails.userName}
+                        {orders.userDetails.name}
                       </h5>
                     </td>
                     <td

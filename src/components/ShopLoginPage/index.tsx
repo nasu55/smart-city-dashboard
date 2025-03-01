@@ -9,11 +9,11 @@ import { serialize } from "object-to-formdata";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";    
-
+import Image from "next/image";
 import { z } from "zod";
 
 const mySchema = z.object({
-    email: z.string().min(1, { message: "UserName is required." }),
+    email: z.string().min(1, { message: "Email is required." }),
     password: z.string().min(1, { message: "Password is required." }),
 });
 
@@ -52,6 +52,21 @@ const LoginPage = () => {
 
     return (
         <>
+            
+            
+        <span className="h-12 w-[100%]  relative rounded-full">
+                                         <div className="relative w-full h-[40rem]"> <Image
+                                           fill
+                                           src="/images/login/User-02.png"
+                                            // style={{
+                                            //   width: "auto",
+                                            //   height: "auto",
+                                            // }}
+                                            alt="User"
+                                            className="object-fill"
+                                          /></div>
+                                        </span>
+                                        `<div className="absolute w-full top-0 right-[-24rem]">
             <div className="flex h-[100vh] w-full items-center justify-center">
                 <div className="h-[50%] w-[30%]">
                     <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
@@ -98,7 +113,7 @@ const LoginPage = () => {
                                             {...register("email")}
                                             className="w-full rounded-[7px] border-[1.5px] border-stroke bg-white py-2.5 pl-12.5 pr-4.5 text-dark focus:border-primary focus-visible:outline-none dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                                             type="text"
-                                            placeholder="Username"
+                                            placeholder="Email"
                                         />
                                         {errors.email && (
                                             <p className="text-sm text-red-600">
@@ -160,6 +175,7 @@ const LoginPage = () => {
                             </form>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </>
