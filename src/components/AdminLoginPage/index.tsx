@@ -31,7 +31,7 @@ const LoginPage = () => {
       const response = await adminApi.adminLogin(data);
       if (response.data.success == true) {
         toast.success(response.data.message);
-        router.push("/admin");
+        router.push("/admin/shop");
       }
       if (response.data.success == false) {
         toast.error(response.data.message);

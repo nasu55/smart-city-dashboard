@@ -43,7 +43,7 @@ const LoginPage = () => {
           response.data.userData.image,
         );
 
-        router.push("/shop-admin");
+        router.push("/shop-admin/products");
       }
       if (response.data.success == false) {
         toast.error(response.data.message);
