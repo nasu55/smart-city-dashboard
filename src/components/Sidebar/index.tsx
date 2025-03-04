@@ -16,6 +16,7 @@ import ViewCarouselSharpIcon from "@mui/icons-material/ViewCarouselSharp";
 import PeopleOutlineSharpIcon from "@mui/icons-material/PeopleOutlineSharp";
 import CategorySharpIcon from "@mui/icons-material/CategorySharp";
 import StorefrontSharpIcon from "@mui/icons-material/StorefrontSharp";
+import LogoSmartCity from "../../../public/images/smrtcty.svg";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -98,16 +99,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         {/* <!-- SIDEBAR HEADER --> */}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 xl:py-10">
           {/* <Link href="/"> */}
-          <Image
-            width={176}
-            height={32}
-            src={smartlogo}
-            alt="Logo"
-            priority
-            className=""
-            style={{ width: "20rem", height: "8rem" }}
-          />
-
+        <div className="relative h-[4.8rem] w-[15rem]">
+            <Image
+              src={LogoSmartCity}
+              alt="Logo"
+              priority
+              className="object-cover rounded-xl"
+              fill
+            />
+  
+        </div>
           {/* </Link>  */}
 
           <button

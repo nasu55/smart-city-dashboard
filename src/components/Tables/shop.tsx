@@ -67,7 +67,7 @@ const ShopTable = ({ listOfShops }: Props) => {
   return (
     <>
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
-        <div className="ml-7 flex justify-between">
+        <div className="ml-7 flex justify-end">
           <div>
             <form className="mx-auto max-w-md"></form>
           </div>
