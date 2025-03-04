@@ -30,9 +30,6 @@ const LoginPage = () => {
     try {
       const response = await adminApi.adminLogin(data);
       if (response.data.success == true) {
-        // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
-        // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
-
         toast.success(response.data.message);
         router.push("/admin");
       }
@@ -46,20 +43,20 @@ const LoginPage = () => {
 
   return (
     <>
-    <span className="h-12 w-[100%]  relative rounded-full">
-                                 <div className="relative w-full h-[40rem]"> <Image
-                                   fill
-                                   src="/images/login/User-03.png"
-                                    // style={{
-                                    //   width: "auto",
-                                    //   height: "auto",
-                                    // }}
-                                    alt="User"
-                                    className="object-fill"
-                                  /></div>
-                                </span>
-                                `<div className="absolute w-full top-0 right-[-25.5rem]">
-      <div className="flex h-[100vh] w-full items-center justify-center ">
+      <span className="relative h-12  w-[100%] rounded-full">
+        <div className="relative h-screen w-full">
+          {" "}
+          <Image
+            fill
+            src="/images/login/User-03.png"
+            alt="User"
+            className="object-fill"
+          />
+        </div>
+      </span>
+      `
+      <div className="absolute right-[-32rem] top-0 w-full">
+        <div className="flex h-[100vh] w-full items-center justify-center ">
           <div className=" h-[50%] w-[30%] ">
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
@@ -163,8 +160,8 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          </div>
         </div>
+      </div>
     </>
   );
 };

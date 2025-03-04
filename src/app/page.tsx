@@ -5,7 +5,7 @@ import MainPage from "@/components/LoginPage";
 
 export const metadata: Metadata = {
   title:
-    "Shop-admin",
+    "Smart-City",
   description: "This is  Home page for Shop-Admin",
 };
 

@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@headlessui/react": "^2.1.10",
     "@hookform/resolvers": "^3.9.0",
-    "@mui/material": "^6.1.5",
+    "@mui/icons-material": "^6.4.6",
+    "@mui/material": "^6.4.6",
     "apexcharts": "^3.45.2",
     "axios": "^1.7.7",
     "flatpickr": "^4.6.13",
